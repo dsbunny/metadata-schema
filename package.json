@@ -13,9 +13,9 @@
 	"license": "MIT",
 	"private": false,
 	"devDependencies": {
-		"typescript": "^5.5.3",
-		"zod": "^4.1.11",
-		"@dsbunny/ktx-schema": "github:dsbunny/ktx-schema#8c58331"
+		"typescript": "^5.9.3",
+		"zod": "^4.1.12",
+		"@dsbunny/ktx-schema": "github:dsbunny/ktx-schema#c15aa2a"
 	},
 	"peerDependencies": {
 		"zod": "^4.0.0",
