@@ -1,4 +1,4 @@
-import { z } from 'zod/v4';
+import * as z from "zod";
 export declare const FormatEnum: z.ZodEnum<{
     input: "input";
     avif: "avif";
@@ -36,7 +36,7 @@ export type Channels = z.infer<typeof Channels>;
 export declare const LevelMetadata: z.ZodObject<{
     width: z.ZodNumber;
     height: z.ZodNumber;
-}, {}, {}>;
+}, z.core.$strip>;
 export type LevelMetadata = z.infer<typeof LevelMetadata>;
 export declare const SharpMetadata: z.ZodObject<{
     orientation: z.ZodOptional<z.ZodNumber>;
@@ -93,17 +93,17 @@ export declare const SharpMetadata: z.ZodObject<{
         r: z.ZodNumber;
         g: z.ZodNumber;
         b: z.ZodNumber;
-    }, {}, {}>, z.ZodNumber]>>;
+    }, z.core.$strip>, z.ZodNumber]>>;
     levels: z.ZodOptional<z.ZodArray<z.ZodObject<{
         width: z.ZodNumber;
         height: z.ZodNumber;
-    }, {}, {}>>>;
+    }, z.core.$strip>>>;
     subifds: z.ZodOptional<z.ZodNumber>;
     resolutionUnit: z.ZodOptional<z.ZodEnum<{
         inch: "inch";
         cm: "cm";
     }>>;
     formatMagick: z.ZodOptional<z.ZodString>;
-}, {}, {}>;
+}, z.core.$strip>;
 export type SharpMetadata = z.infer<typeof SharpMetadata>;
 //# sourceMappingURL=sharp-metadata.schema.d.ts.map

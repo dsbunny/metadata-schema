@@ -1,1 +1,1 @@
-{"version":3,"file":"iptc-profile.schema.d.ts","sourceRoot":"","sources":["../src/iptc-profile.schema.ts"],"names":[],"mappings":"AAGA,OAAO,EAAE,CAAC,EAAE,MAAM,QAAQ,CAAC;AAE3B,eAAO,MAAM,WAAW;;;;;;;;;;;;UAwBsB,CAAC;AAC/C,MAAM,MAAM,WAAW,GAAG,CAAC,CAAC,KAAK,CAAC,OAAO,WAAW,CAAC,CAAC"}
+{"version":3,"file":"iptc-profile.schema.d.ts","sourceRoot":"","sources":["../src/iptc-profile.schema.ts"],"names":[],"mappings":"AAGA,OAAO,KAAK,CAAC,MAAM,KAAK,CAAC;AAEzB,eAAO,MAAM,WAAW;;;;;;;;;;;;iBAwBsB,CAAC;AAC/C,MAAM,MAAM,WAAW,GAAG,CAAC,CAAC,KAAK,CAAC,OAAO,WAAW,CAAC,CAAC"}

@@ -1,6 +1,6 @@
 // vim: tabstop=8 softtabstop=0 noexpandtab shiftwidth=8 nosmarttab
 // File metadata
-import { z } from "zod/v4";
+import * as z from "zod";
 import { S3URI } from "./uri.schema.js";
 export const FileStatAndChecksums = z.object({
     s3_filename: z.string().min(1).max(255) // Matching Google Drive.

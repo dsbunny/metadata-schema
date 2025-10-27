@@ -1,7 +1,7 @@
 // vim: tabstop=8 softtabstop=0 noexpandtab shiftwidth=8 nosmarttab
 // Derived from icc.IccProfile in icc/index.d.ts.
 
-import { z } from 'zod/v4';
+import * as z from "zod";
 
 const Version = z.enum(['2.0', '2.1', '2.4', '4.0', '4.2', '4.3', '4.4'])
 	.describe('The version of the ICC profile.');

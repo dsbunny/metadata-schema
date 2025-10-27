@@ -1,4 +1,4 @@
-import { z } from 'zod/v4';
+import * as z from "zod";
 export declare const ExifMetadata: z.ZodObject<{
     Image: z.ZodOptional<z.ZodObject<{
         ProcessingSoftware: z.ZodOptional<z.ZodString>;
@@ -100,7 +100,7 @@ export declare const ExifMetadata: z.ZodObject<{
         Interlace: z.ZodOptional<z.ZodNumber>;
         TimeZoneOffset: z.ZodOptional<z.ZodNumber>;
         SelfTimerMode: z.ZodOptional<z.ZodNumber>;
-        DateTimeOriginal: z.ZodOptional<z.iso.ZodISODateTime>;
+        DateTimeOriginal: z.ZodOptional<z.ZodISODateTime>;
         CompressedBitsPerPixel: z.ZodOptional<z.ZodNumber>;
         ShutterSpeedValue: z.ZodOptional<z.ZodNumber>;
         ApertureValue: z.ZodOptional<z.ZodNumber>;
@@ -190,7 +190,7 @@ export declare const ExifMetadata: z.ZodObject<{
         PreviewSettingsName: z.ZodOptional<z.ZodNumber>;
         PreviewSettingsDigest: z.ZodOptional<z.ZodNumber>;
         PreviewColorSpace: z.ZodOptional<z.ZodNumber>;
-        PreviewDateTime: z.ZodOptional<z.iso.ZodISODateTime>;
+        PreviewDateTime: z.ZodOptional<z.ZodISODateTime>;
         SubTileBlockSize: z.ZodOptional<z.ZodNumber>;
         RowInterleaveFactor: z.ZodOptional<z.ZodNumber>;
         ProfileLookTableDims: z.ZodOptional<z.ZodNumber>;
@@ -222,7 +222,7 @@ export declare const ExifMetadata: z.ZodObject<{
         ForwardMatrix3: z.ZodOptional<z.ZodNumber>;
         MaskSubArea: z.ZodOptional<z.ZodNumber>;
         ReductionMatrix3: z.ZodOptional<z.ZodNumber>;
-    }, {}, {}>>;
+    }, z.core.$strip>>;
     Photo: z.ZodOptional<z.ZodObject<{
         ExposureTime: z.ZodOptional<z.ZodNumber>;
         FNumber: z.ZodOptional<z.ZodNumber>;
@@ -235,8 +235,8 @@ export declare const ExifMetadata: z.ZodObject<{
         ISOSpeed: z.ZodOptional<z.ZodNumber>;
         ISOSpeedLatitudeyyy: z.ZodOptional<z.ZodNumber>;
         ISOSpeedLatitudezzz: z.ZodOptional<z.ZodNumber>;
-        DateTimeOriginal: z.ZodOptional<z.iso.ZodISODateTime>;
-        DateTimeDigitized: z.ZodOptional<z.iso.ZodISODateTime>;
+        DateTimeOriginal: z.ZodOptional<z.ZodISODateTime>;
+        DateTimeDigitized: z.ZodOptional<z.ZodISODateTime>;
         OffsetTime: z.ZodOptional<z.ZodString>;
         OffsetTimeOriginal: z.ZodOptional<z.ZodString>;
         OffsetTimeDigitized: z.ZodOptional<z.ZodString>;
@@ -294,13 +294,13 @@ export declare const ExifMetadata: z.ZodObject<{
         CompositeImage: z.ZodOptional<z.ZodNumber>;
         SourceImageNumberOfCompositeImage: z.ZodOptional<z.ZodNumber>;
         Gamma: z.ZodOptional<z.ZodNumber>;
-    }, {}, {}>>;
+    }, z.core.$strip>>;
     Iop: z.ZodOptional<z.ZodObject<{
         InteroperabilityIndex: z.ZodOptional<z.ZodString>;
         RelatedImageFileFormat: z.ZodOptional<z.ZodString>;
         RelatedImageWidth: z.ZodOptional<z.ZodNumber>;
         RelatedImageLength: z.ZodOptional<z.ZodNumber>;
-    }, {}, {}>>;
+    }, z.core.$strip>>;
     GPSInfo: z.ZodOptional<z.ZodObject<{
         GPSVersionID: z.ZodOptional<z.ZodArray<z.ZodNumber>>;
         GPSLatitudeRef: z.ZodOptional<z.ZodString>;
@@ -332,7 +332,7 @@ export declare const ExifMetadata: z.ZodObject<{
         GPSDateStamp: z.ZodOptional<z.ZodString>;
         GPSDifferential: z.ZodOptional<z.ZodNumber>;
         GPSHPositioningError: z.ZodOptional<z.ZodNumber>;
-    }, {}, {}>>;
-}, {}, {}>;
+    }, z.core.$strip>>;
+}, z.core.$strip>;
 export type ExifMetadata = z.infer<typeof ExifMetadata>;
 //# sourceMappingURL=exif-metadata.schema.d.ts.map

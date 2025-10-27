@@ -1,6 +1,6 @@
 // vim: tabstop=8 softtabstop=0 noexpandtab shiftwidth=8 nosmarttab
 // Derived from fluent-ffmpeg/ffprobe.js.
-import { z } from 'zod/v4';
+import * as z from "zod";
 export const FfprobeStreamDisposition = z.object({
     default: z.number().optional()
         .describe('Whether the stream is the default.'),

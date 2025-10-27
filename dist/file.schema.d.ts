@@ -1,4 +1,4 @@
-import { z } from "zod/v4";
+import * as z from "zod";
 export declare const FileStatAndChecksums: z.ZodObject<{
     s3_filename: z.ZodString;
     content_type: z.ZodString;
@@ -10,6 +10,6 @@ export declare const FileStatAndChecksums: z.ZodObject<{
     s3_version_id: z.ZodString;
     s3_etag: z.ZodString;
     s3_parts: z.ZodArray<z.ZodNumber>;
-}, {}, {}>;
+}, z.core.$strip>;
 export type FileStatAndChecksums = z.infer<typeof FileStatAndChecksums>;
 //# sourceMappingURL=file.schema.d.ts.map

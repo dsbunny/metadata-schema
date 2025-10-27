@@ -1,7 +1,7 @@
 // vim: tabstop=8 softtabstop=0 noexpandtab shiftwidth=8 nosmarttab
 // REF: https://en.wikipedia.org/wiki/Uniform_Resource_Identifier
 
-import { z } from "zod/v4";
+import * as z from "zod";
 
 // Basic URI validation using regex
 export const URI = z.string().regex(

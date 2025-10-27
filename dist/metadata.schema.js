@@ -1,5 +1,5 @@
 // vim: tabstop=8 softtabstop=0 noexpandtab shiftwidth=8 nosmarttab
-import { z } from 'zod/v4';
+import * as z from "zod";
 import { KTXInfoSchema } from '@dsbunny/ktx-schema';
 import { SharpMetadata } from './sharp-metadata.schema.js';
 import { ExifMetadata } from './exif-metadata.schema.js';
@@ -72,7 +72,7 @@ export const RejectedMetadata = z.object({
 })
     .describe('Metadata for an rejected file.');
 // Union of all metadata types.
-export const Metadata = z.discriminatedUnion([
+export const Metadata = z.discriminatedUnion("type", [
     FileMetadata,
     ImageMetadata,
     TextureMetadata,
@@ -162,7 +162,7 @@ export const PrevueMetadata = z.object({
 })
     .describe('Metadata for a video prevue.');
 // Union of all preview metadata types.
-export const PreviewMetadata = z.discriminatedUnion([
+export const PreviewMetadata = z.discriminatedUnion("type", [
     PosterMetadata,
     AnimatedPosterMetadata,
     PosterSeriesMetadata,

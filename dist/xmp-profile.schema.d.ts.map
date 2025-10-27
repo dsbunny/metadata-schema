@@ -1,1 +1,1 @@
-{"version":3,"file":"xmp-profile.schema.d.ts","sourceRoot":"","sources":["../src/xmp-profile.schema.ts"],"names":[],"mappings":"AAGA,OAAO,EAAE,CAAC,EAAE,MAAM,QAAQ,CAAC;AAE3B,eAAO,MAAM,UAAU;;;;;;;;;UAkBsB,CAAC;AAC9C,MAAM,MAAM,UAAU,GAAG,CAAC,CAAC,KAAK,CAAC,OAAO,UAAU,CAAC,CAAC"}
+{"version":3,"file":"xmp-profile.schema.d.ts","sourceRoot":"","sources":["../src/xmp-profile.schema.ts"],"names":[],"mappings":"AAGA,OAAO,KAAK,CAAC,MAAM,KAAK,CAAC;AAEzB,eAAO,MAAM,UAAU;;;;;;;;;iBAkBsB,CAAC;AAC9C,MAAM,MAAM,UAAU,GAAG,CAAC,CAAC,KAAK,CAAC,OAAO,UAAU,CAAC,CAAC"}

@@ -1,6 +1,6 @@
 {
 	"name": "@dsbunny/metadata-schema",
-	"version": "8.1.19",
+	"version": "8.2.20",
 	"description": "ZOD metadata for media stored in the DSBunny DAM",
 	"type": "module",
 	"main": "dist/index.js",
@@ -13,10 +13,12 @@
 	"license": "MIT",
 	"private": false,
 	"devDependencies": {
-		"typescript": "^5.5.3"
+		"typescript": "^5.5.3",
+		"zod": "^4.1.11",
+		"@dsbunny/ktx-schema": "github:dsbunny/ktx-schema#8c58331"
 	},
-	"dependencies": {
-		"@dsbunny/ktx-schema": "github:dsbunny/ktx-schema#e7b1e39",
-		"zod": "3.25.0-beta.20250515T215617"
+	"peerDependencies": {
+		"zod": "^4.0.0",
+		"@dsbunny/ktx-schema": "github:dsbunny/ktx-schema"
 	}
 }
