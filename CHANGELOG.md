@@ -1,7 +1,7 @@
 # Changelog
 ## v8.2.20
 - Bump to `zod@4.1.11`.
-- Add Zod to `peerDependencies` so users can bring their own Zod.
+- Move Zod to `peerDependencies` so users can bring their own Zod.
 
 ## v8.1.19
 - Bump to `zod@next` with `zod/v4` imports.
