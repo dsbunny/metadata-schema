@@ -32,17 +32,17 @@ const BaseMetadata = {
 	tags: z.array(z.string().max(64)).max(100).optional(),
 };
 
-export const HintDataPostEntry = z.object({
+export const HintDataPosterEntry = z.object({
 	quality: z.enum(['medium', 'high', 'sample']),
 	width: z.number().int().positive(),
 	height: z.number().int().positive(),
 })
 	.describe('A single entry in the hint poster array.');
-export type HintDataPostEntry = z.infer<typeof HintDataPostEntry>;
+export type HintDataPosterEntry = z.infer<typeof HintDataPosterEntry>;
 
 export const HintData = z.object({
 	type: z.literal('hint'),
-	poster: z.array(HintDataPostEntry),
+	poster: z.array(HintDataPosterEntry),
 })
 	.describe('Hint data for assets.');
 export type HintData = z.infer<typeof HintData>;

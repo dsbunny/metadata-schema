@@ -1,5 +1,5 @@
 import * as z from "zod";
-export declare const HintDataPostEntry: z.ZodObject<{
+export declare const HintDataPosterEntry: z.ZodObject<{
     quality: z.ZodEnum<{
         medium: "medium";
         high: "high";
@@ -8,7 +8,7 @@ export declare const HintDataPostEntry: z.ZodObject<{
     width: z.ZodNumber;
     height: z.ZodNumber;
 }, z.core.$strip>;
-export type HintDataPostEntry = z.infer<typeof HintDataPostEntry>;
+export type HintDataPosterEntry = z.infer<typeof HintDataPosterEntry>;
 export declare const HintData: z.ZodObject<{
     type: z.ZodLiteral<"hint">;
     poster: z.ZodArray<z.ZodObject<{

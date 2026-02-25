@@ -17,7 +17,7 @@ const BaseMetadata = {
     timings: FileTimings,
     tags: z.array(z.string().max(64)).max(100).optional(),
 };
-export const HintDataPostEntry = z.object({
+export const HintDataPosterEntry = z.object({
     quality: z.enum(['medium', 'high', 'sample']),
     width: z.number().int().positive(),
     height: z.number().int().positive(),
@@ -25,7 +25,7 @@ export const HintDataPostEntry = z.object({
     .describe('A single entry in the hint poster array.');
 export const HintData = z.object({
     type: z.literal('hint'),
-    poster: z.array(HintDataPostEntry),
+    poster: z.array(HintDataPosterEntry),
 })
     .describe('Hint data for assets.');
 export const FileMetadata = z.object({
