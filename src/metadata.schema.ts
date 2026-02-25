@@ -32,13 +32,17 @@ const BaseMetadata = {
 	tags: z.array(z.string().max(64)).max(100).optional(),
 };
 
+export const HintDataPostEntry = z.object({
+	quality: z.enum(['medium', 'high', 'sample']),
+	width: z.number().int().positive(),
+	height: z.number().int().positive(),
+})
+	.describe('A single entry in the hint poster array.');
+export type HintDataPostEntry = z.infer<typeof HintDataPostEntry>;
+
 export const HintData = z.object({
 	type: z.literal('hint'),
-	poster: z.array(z.object({
-		quality: z.enum(['medium', 'high', 'sample']),
-		width: z.number().int().positive(),
-		height: z.number().int().positive(),
-	})),
+	poster: z.array(HintDataPostEntry),
 })
 	.describe('Hint data for assets.');
 export type HintData = z.infer<typeof HintData>;
@@ -120,64 +124,78 @@ export type MetadataMetadata = z.infer<typeof MetadataMetadata>;
 // #endregion
 
 // #region Preview
+export const PosterMetadataEntry = z.object({
+	...BaseMetadata,
+	type: z.literal('poster-image'),
+	quality: z.enum(['medium', 'high', 'sample']),
+	width: z.number().int().positive(),
+	height: z.number().int().positive(),
+	blurhash: z.string().optional(),
+	timings: PosterTimings,
+})
+	.describe('A single entry in the poster array.');
+export type PosterMetadataEntry = z.infer<typeof PosterMetadataEntry>;
+
 export const PosterMetadata = z.object({
 	type: z.literal('poster'),
-	poster: z.array(z.object({
-		...BaseMetadata,
-		type: z.literal('poster-image'),
-		quality: z.enum(['medium', 'high', 'sample']),
-		width: z.number().int().positive(),
-		height: z.number().int().positive(),
-		blurhash: z.string().optional(),
-		timings: PosterTimings,
-	})),
+	poster: z.array(PosterMetadataEntry),
 })
 	.describe('Metadata for an image poster.');
 export type PosterMetadata = z.infer<typeof PosterMetadata>;
 
+export const AnimatedPosterMetadataEntry = z.object({
+	...BaseMetadata,
+	type: z.literal('animated-poster-image'),
+	width: z.number().int().positive(),
+	height: z.number().int().positive(),
+	timings: AnimatedPosterTimings,
+})
+	.describe('A single entry in the animated poster array.');
+export type AnimatedPosterMetadataEntry = z.infer<typeof AnimatedPosterMetadataEntry>;
+
 export const AnimatedPosterMetadata = z.object({
 	type: z.literal('animated-poster'),
-	poster: z.object({
-		...BaseMetadata,
-		type: z.literal('animated-poster-image'),
-		width: z.number().int().positive(),
-		height: z.number().int().positive(),
-		timings: AnimatedPosterTimings,
-	}),
+	poster: AnimatedPosterMetadataEntry,
 })
 	.describe('Metadata for an animated poster.');
 export type AnimatedPosterMetadata = z.infer<typeof AnimatedPosterMetadata>;
 
+export const PosterSeriesMetadataEntry = z.object({
+	...BaseMetadata,
+	type: z.literal('poster-series-image'),
+	index: z.number().int().min(1).max(3),
+	quality: z.enum(['medium', 'high', 'sample']),
+	width: z.number().int().positive(),
+	height: z.number().int().positive(),
+	blurhash: z.string().optional(),
+	timings: PosterSeriesTimings,
+})
+	.describe('A single entry in the poster series array.');
+export type PosterSeriesMetadataEntry = z.infer<typeof PosterSeriesMetadataEntry>;
+
 export const PosterSeriesMetadata = z.object({
 	type: z.literal('poster-series'),
-	series: z.array(z.object({
-		...BaseMetadata,
-		type: z.literal('poster-series-image'),
-		index: z.number().int().min(1).max(3),
-		quality: z.enum(['medium', 'high', 'sample']),
-		width: z.number().int().positive(),
-		height: z.number().int().positive(),
-		blurhash: z.string().optional(),
-		timings: PosterSeriesTimings,
-	})),
+	series: z.array(PosterSeriesMetadataEntry),
 })
 	.describe('Metadata for an image poster series.');
 export type PosterSeriesMetadata = z.infer<typeof PosterSeriesMetadata>;
 
+export const TileSeriesMetadataEntry = z.object({
+	...BaseMetadata,
+	type: z.literal('tile-series-image'),
+	index: z.number().int().min(1).max(9999),
+	count: z.number().int().min(1).max(9),
+	quality: z.enum(['low']),
+	width: z.number().int().positive(),
+	height: z.number().int().positive(),
+	timings: TileSeriesImageTimings,
+})
+	.describe('A single entry in the tile series array.');
+export type TileSeriesMetadataEntry = z.infer<typeof TileSeriesMetadataEntry>;
+
 export const TileSeriesMetadata = z.object({
 	type: z.literal('tile-series'),
-	series: z.array(z.object({
-		...BaseMetadata,
-		type: z.literal('tile-series-image'),
-		index: z.number().int().min(1).max(9999),
-		count: z.number().int().min(1).max(9),
-		quality: z.enum(['low']),
-		start_time: z.number().int().min(0),
-		end_time: z.number().int().min(1),
-		width: z.number().int().positive(),
-		height: z.number().int().positive(),
-		timings: TileSeriesImageTimings,
-	})),
+	series: z.array(TileSeriesMetadataEntry),
 	timings: TileSeriesTimings,
 })
 	.describe('Metadata for an image tile series.');
@@ -191,15 +209,19 @@ export const TileSeriesMetadataMetadata = z.object({
 	.describe('Metadata for an image tile series metadata.');
 export type TileSeriesMetadataMetadata = z.infer<typeof TileSeriesMetadataMetadata>;
 
+export const PrevueMetadataEntry = z.object({
+	...BaseMetadata,
+	type: z.literal('prevue-video'),
+	width: z.number().int().positive(),
+	height: z.number().int().positive(),
+	timings: PrevueTimings,
+})
+	.describe('A single entry in the prevue array.');
+export type PrevueMetadataEntry = z.infer<typeof PrevueMetadataEntry>;
+
 export const PrevueMetadata = z.object({
 	type: z.literal('prevue'),
-	prevue: z.object({
-		...BaseMetadata,
-		type: z.literal('prevue-video'),
-		width: z.number().int().positive(),
-		height: z.number().int().positive(),
-		timings: PrevueTimings,
-	}),
+	prevue: PrevueMetadataEntry,
 })
 	.describe('Metadata for a video prevue.');
 export type PrevueMetadata = z.infer<typeof PrevueMetadata>;

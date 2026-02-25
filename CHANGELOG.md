@@ -1,6 +1,7 @@
 # Changelog
 ## v8.2.21
 - Bump to `zod@4.3.6`.
+- Additional schemas for array entries.
 
 ## v8.2.20
 - Bump to `zod@4.1.11`.

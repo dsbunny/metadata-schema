@@ -1,4 +1,14 @@
 import * as z from "zod";
+export declare const HintDataPostEntry: z.ZodObject<{
+    quality: z.ZodEnum<{
+        medium: "medium";
+        high: "high";
+        sample: "sample";
+    }>;
+    width: z.ZodNumber;
+    height: z.ZodNumber;
+}, z.core.$strip>;
+export type HintDataPostEntry = z.infer<typeof HintDataPostEntry>;
 export declare const HintData: z.ZodObject<{
     type: z.ZodLiteral<"hint">;
     poster: z.ZodArray<z.ZodObject<{
@@ -2682,6 +2692,39 @@ export declare const MetadataMetadata: z.ZodObject<{
     tags: z.ZodOptional<z.ZodArray<z.ZodString>>;
 }, z.core.$strip>;
 export type MetadataMetadata = z.infer<typeof MetadataMetadata>;
+export declare const PosterMetadataEntry: z.ZodObject<{
+    type: z.ZodLiteral<"poster-image">;
+    quality: z.ZodEnum<{
+        medium: "medium";
+        high: "high";
+        sample: "sample";
+    }>;
+    width: z.ZodNumber;
+    height: z.ZodNumber;
+    blurhash: z.ZodOptional<z.ZodString>;
+    timings: z.ZodObject<{
+        poster_canvas_duration: z.ZodOptional<z.ZodNumber>;
+        poster_ffmpeg_duration: z.ZodOptional<z.ZodNumber>;
+        poster_avifenc_duration: z.ZodOptional<z.ZodNumber>;
+        poster_sharp_duration: z.ZodOptional<z.ZodNumber>;
+        poster_ck_duration: z.ZodNumber;
+        poster_http_duration: z.ZodNumber;
+    }, z.core.$strip>;
+    file: z.ZodObject<{
+        s3_filename: z.ZodString;
+        content_type: z.ZodString;
+        size: z.ZodNumber;
+        mtime: z.ZodString;
+        md5: z.ZodString;
+        sha256: z.ZodString;
+        s3_uri: z.ZodString;
+        s3_version_id: z.ZodString;
+        s3_etag: z.ZodString;
+        s3_parts: z.ZodArray<z.ZodNumber>;
+    }, z.core.$strip>;
+    tags: z.ZodOptional<z.ZodArray<z.ZodString>>;
+}, z.core.$strip>;
+export type PosterMetadataEntry = z.infer<typeof PosterMetadataEntry>;
 export declare const PosterMetadata: z.ZodObject<{
     type: z.ZodLiteral<"poster">;
     poster: z.ZodArray<z.ZodObject<{
@@ -2718,6 +2761,30 @@ export declare const PosterMetadata: z.ZodObject<{
     }, z.core.$strip>>;
 }, z.core.$strip>;
 export type PosterMetadata = z.infer<typeof PosterMetadata>;
+export declare const AnimatedPosterMetadataEntry: z.ZodObject<{
+    type: z.ZodLiteral<"animated-poster-image">;
+    width: z.ZodNumber;
+    height: z.ZodNumber;
+    timings: z.ZodObject<{
+        animated_poster_ffmpeg_duration: z.ZodNumber;
+        animated_poster_ck_duration: z.ZodNumber;
+        animated_poster_http_duration: z.ZodNumber;
+    }, z.core.$strip>;
+    file: z.ZodObject<{
+        s3_filename: z.ZodString;
+        content_type: z.ZodString;
+        size: z.ZodNumber;
+        mtime: z.ZodString;
+        md5: z.ZodString;
+        sha256: z.ZodString;
+        s3_uri: z.ZodString;
+        s3_version_id: z.ZodString;
+        s3_etag: z.ZodString;
+        s3_parts: z.ZodArray<z.ZodNumber>;
+    }, z.core.$strip>;
+    tags: z.ZodOptional<z.ZodArray<z.ZodString>>;
+}, z.core.$strip>;
+export type AnimatedPosterMetadataEntry = z.infer<typeof AnimatedPosterMetadataEntry>;
 export declare const AnimatedPosterMetadata: z.ZodObject<{
     type: z.ZodLiteral<"animated-poster">;
     poster: z.ZodObject<{
@@ -2745,6 +2812,39 @@ export declare const AnimatedPosterMetadata: z.ZodObject<{
     }, z.core.$strip>;
 }, z.core.$strip>;
 export type AnimatedPosterMetadata = z.infer<typeof AnimatedPosterMetadata>;
+export declare const PosterSeriesMetadataEntry: z.ZodObject<{
+    type: z.ZodLiteral<"poster-series-image">;
+    index: z.ZodNumber;
+    quality: z.ZodEnum<{
+        medium: "medium";
+        high: "high";
+        sample: "sample";
+    }>;
+    width: z.ZodNumber;
+    height: z.ZodNumber;
+    blurhash: z.ZodOptional<z.ZodString>;
+    timings: z.ZodObject<{
+        poster_series_ffmpeg_duration: z.ZodNumber;
+        poster_series_avifenc_duration: z.ZodOptional<z.ZodNumber>;
+        poster_series_sharp_duration: z.ZodOptional<z.ZodNumber>;
+        poster_series_ck_duration: z.ZodNumber;
+        poster_series_http_duration: z.ZodNumber;
+    }, z.core.$strip>;
+    file: z.ZodObject<{
+        s3_filename: z.ZodString;
+        content_type: z.ZodString;
+        size: z.ZodNumber;
+        mtime: z.ZodString;
+        md5: z.ZodString;
+        sha256: z.ZodString;
+        s3_uri: z.ZodString;
+        s3_version_id: z.ZodString;
+        s3_etag: z.ZodString;
+        s3_parts: z.ZodArray<z.ZodNumber>;
+    }, z.core.$strip>;
+    tags: z.ZodOptional<z.ZodArray<z.ZodString>>;
+}, z.core.$strip>;
+export type PosterSeriesMetadataEntry = z.infer<typeof PosterSeriesMetadataEntry>;
 export declare const PosterSeriesMetadata: z.ZodObject<{
     type: z.ZodLiteral<"poster-series">;
     series: z.ZodArray<z.ZodObject<{
@@ -2781,6 +2881,34 @@ export declare const PosterSeriesMetadata: z.ZodObject<{
     }, z.core.$strip>>;
 }, z.core.$strip>;
 export type PosterSeriesMetadata = z.infer<typeof PosterSeriesMetadata>;
+export declare const TileSeriesMetadataEntry: z.ZodObject<{
+    type: z.ZodLiteral<"tile-series-image">;
+    index: z.ZodNumber;
+    count: z.ZodNumber;
+    quality: z.ZodEnum<{
+        low: "low";
+    }>;
+    width: z.ZodNumber;
+    height: z.ZodNumber;
+    timings: z.ZodObject<{
+        tile_series_ck_duration: z.ZodNumber;
+        tile_series_http_duration: z.ZodNumber;
+    }, z.core.$strip>;
+    file: z.ZodObject<{
+        s3_filename: z.ZodString;
+        content_type: z.ZodString;
+        size: z.ZodNumber;
+        mtime: z.ZodString;
+        md5: z.ZodString;
+        sha256: z.ZodString;
+        s3_uri: z.ZodString;
+        s3_version_id: z.ZodString;
+        s3_etag: z.ZodString;
+        s3_parts: z.ZodArray<z.ZodNumber>;
+    }, z.core.$strip>;
+    tags: z.ZodOptional<z.ZodArray<z.ZodString>>;
+}, z.core.$strip>;
+export type TileSeriesMetadataEntry = z.infer<typeof TileSeriesMetadataEntry>;
 export declare const TileSeriesMetadata: z.ZodObject<{
     type: z.ZodLiteral<"tile-series">;
     series: z.ZodArray<z.ZodObject<{
@@ -2790,8 +2918,6 @@ export declare const TileSeriesMetadata: z.ZodObject<{
         quality: z.ZodEnum<{
             low: "low";
         }>;
-        start_time: z.ZodNumber;
-        end_time: z.ZodNumber;
         width: z.ZodNumber;
         height: z.ZodNumber;
         timings: z.ZodObject<{
@@ -2840,6 +2966,30 @@ export declare const TileSeriesMetadataMetadata: z.ZodObject<{
     tags: z.ZodOptional<z.ZodArray<z.ZodString>>;
 }, z.core.$strip>;
 export type TileSeriesMetadataMetadata = z.infer<typeof TileSeriesMetadataMetadata>;
+export declare const PrevueMetadataEntry: z.ZodObject<{
+    type: z.ZodLiteral<"prevue-video">;
+    width: z.ZodNumber;
+    height: z.ZodNumber;
+    timings: z.ZodObject<{
+        prevue_ffmpeg_duration: z.ZodNumber;
+        prevue_ck_duration: z.ZodNumber;
+        prevue_http_duration: z.ZodNumber;
+    }, z.core.$strip>;
+    file: z.ZodObject<{
+        s3_filename: z.ZodString;
+        content_type: z.ZodString;
+        size: z.ZodNumber;
+        mtime: z.ZodString;
+        md5: z.ZodString;
+        sha256: z.ZodString;
+        s3_uri: z.ZodString;
+        s3_version_id: z.ZodString;
+        s3_etag: z.ZodString;
+        s3_parts: z.ZodArray<z.ZodNumber>;
+    }, z.core.$strip>;
+    tags: z.ZodOptional<z.ZodArray<z.ZodString>>;
+}, z.core.$strip>;
+export type PrevueMetadataEntry = z.infer<typeof PrevueMetadataEntry>;
 export declare const PrevueMetadata: z.ZodObject<{
     type: z.ZodLiteral<"prevue">;
     prevue: z.ZodObject<{
