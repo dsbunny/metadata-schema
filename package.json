@@ -5,6 +5,12 @@
 	"type": "module",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
+	"author": "Steve-o <fnjordy@gmail.com>",
+	"license": "MIT",
+	"private": false,
+	"allowScripts": {
+		"@dsbunny/ktx-schema": true
+	},
 	"scripts": {
 		"build": "tsc",
 		"clean": "rm -rf dist node_modules package-lock.json",
@@ -12,11 +18,8 @@
 		"rebuild": "npm run clean && npm run pull:upstream && npm install && npm run build",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
-	"author": "Steve-o <fnjordy@gmail.com>",
-	"license": "MIT",
-	"private": false,
 	"devDependencies": {
-		"@dsbunny/ktx-schema": "github:dsbunny/ktx-schema#8727ef4",
+		"@dsbunny/ktx-schema": "github:dsbunny/ktx-schema#b767245",
 		"typescript": "^5.9.3",
 		"zod": "^4.3.6"
 	},

@@ -641,7 +641,12 @@ export declare const TextureMetadata: z.ZodObject<{
     ktx: z.ZodOptional<z.ZodObject<{
         $schema: z.ZodOptional<z.ZodString>;
         valid: z.ZodBoolean;
-        messages: z.ZodArray<z.ZodString>;
+        messages: z.ZodArray<z.ZodUnion<readonly [z.ZodString, z.ZodObject<{
+            id: z.ZodOptional<z.ZodNumber>;
+            type: z.ZodOptional<z.ZodString>;
+            message: z.ZodString;
+            details: z.ZodOptional<z.ZodString>;
+        }, z.core.$loose>]>>;
         header: z.ZodObject<{
             identifier: z.ZodString;
             vkFormat: z.ZodEnum<{
@@ -1181,10 +1186,10 @@ export declare const TextureMetadata: z.ZodObject<{
             }, z.core.$strip>>;
         }, z.core.$strip>;
         keyValueData: z.ZodObject<{
-            KTXorientation: z.ZodString;
+            KTXorientation: z.ZodOptional<z.ZodString>;
             KTXwriter: z.ZodString;
-            KTXwriterScParams: z.ZodString;
-        }, z.core.$strip>;
+            KTXwriterScParams: z.ZodOptional<z.ZodString>;
+        }, z.core.$loose>;
     }, z.core.$strip>>;
     hint: z.ZodOptional<z.ZodObject<{
         type: z.ZodLiteral<"hint">;
@@ -1966,7 +1971,12 @@ export declare const Metadata: z.ZodDiscriminatedUnion<[z.ZodObject<{
     ktx: z.ZodOptional<z.ZodObject<{
         $schema: z.ZodOptional<z.ZodString>;
         valid: z.ZodBoolean;
-        messages: z.ZodArray<z.ZodString>;
+        messages: z.ZodArray<z.ZodUnion<readonly [z.ZodString, z.ZodObject<{
+            id: z.ZodOptional<z.ZodNumber>;
+            type: z.ZodOptional<z.ZodString>;
+            message: z.ZodString;
+            details: z.ZodOptional<z.ZodString>;
+        }, z.core.$loose>]>>;
         header: z.ZodObject<{
             identifier: z.ZodString;
             vkFormat: z.ZodEnum<{
@@ -2506,10 +2516,10 @@ export declare const Metadata: z.ZodDiscriminatedUnion<[z.ZodObject<{
             }, z.core.$strip>>;
         }, z.core.$strip>;
         keyValueData: z.ZodObject<{
-            KTXorientation: z.ZodString;
+            KTXorientation: z.ZodOptional<z.ZodString>;
             KTXwriter: z.ZodString;
-            KTXwriterScParams: z.ZodString;
-        }, z.core.$strip>;
+            KTXwriterScParams: z.ZodOptional<z.ZodString>;
+        }, z.core.$loose>;
     }, z.core.$strip>>;
     hint: z.ZodOptional<z.ZodObject<{
         type: z.ZodLiteral<"hint">;
