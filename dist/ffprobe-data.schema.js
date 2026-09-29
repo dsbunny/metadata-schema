@@ -1,7 +1,7 @@
 // vim: tabstop=8 softtabstop=0 noexpandtab shiftwidth=8 nosmarttab
 // Derived from fluent-ffmpeg/ffprobe.js.
 import * as z from "zod";
-export const FfprobeStreamDisposition = z.object({
+export const FfprobeStreamDispositionSchema = z.object({
     default: z.number().optional()
         .describe('Whether the stream is the default.'),
     dub: z.number().optional()
@@ -28,7 +28,7 @@ export const FfprobeStreamDisposition = z.object({
         .describe('Whether the stream is timed thumbnails.'),
 })
     .describe('Disposition of the stream.');
-export const FfprobeStream = z.object({
+export const FfprobeStreamSchema = z.object({
     index: z.number()
         .describe('The index of the stream.'),
     codec_name: z.string().optional()
@@ -117,13 +117,13 @@ export const FfprobeStream = z.object({
         .describe('The channel layout of the audio stream.'),
     bits_per_sample: z.number().optional()
         .describe('The bits per sample of the audio stream.'),
-    disposition: FfprobeStreamDisposition.optional()
+    disposition: FfprobeStreamDispositionSchema.optional()
         .describe('The disposition of the stream.'),
     rotation: z.union([z.string(), z.number()]).optional()
         .describe('The rotation of the video stream.'),
 })
     .describe('Stream metadata from the ffprobe tool.');
-export const FfprobeFormat = z.object({
+export const FfprobeFormatSchema = z.object({
     filename: z.string().optional()
         .describe('The filename of the file.'),
     nb_streams: z.number().optional()
@@ -148,10 +148,10 @@ export const FfprobeFormat = z.object({
         .describe('The tags of the file.'),
 })
     .describe('Format metadata from the ffprobe tool.');
-export const FfprobeData = z.object({
-    streams: z.array(FfprobeStream)
+export const FfprobeDataSchema = z.object({
+    streams: z.array(FfprobeStreamSchema)
         .describe('The streams of the file.'),
-    format: FfprobeFormat,
+    format: FfprobeFormatSchema,
     //chapters: z.array(z.unknown()),
 })
     .describe('Metadata from the ffprobe tool.');

@@ -1,5 +1,5 @@
 import * as z from "zod";
-export declare const IptcProfile: z.ZodObject<{
+export declare const IptcProfileSchema: z.ZodObject<{
     title: z.ZodOptional<z.ZodString>;
     caption: z.ZodOptional<z.ZodString>;
     credit: z.ZodOptional<z.ZodString>;
@@ -12,5 +12,5 @@ export declare const IptcProfile: z.ZodObject<{
     copyright: z.ZodOptional<z.ZodString>;
     category: z.ZodOptional<z.ZodString>;
 }, z.core.$strip>;
-export type IptcProfile = z.infer<typeof IptcProfile>;
+export type IptcProfile = z.infer<typeof IptcProfileSchema>;
 //# sourceMappingURL=iptc-profile.schema.d.ts.map

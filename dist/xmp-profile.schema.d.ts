@@ -1,5 +1,5 @@
 import * as z from "zod";
-export declare const XmpProfile: z.ZodObject<{
+export declare const XmpProfileSchema: z.ZodObject<{
     keywords: z.ZodOptional<z.ZodArray<z.ZodString>>;
     title: z.ZodOptional<z.ZodString>;
     description: z.ZodOptional<z.ZodString>;
@@ -9,5 +9,5 @@ export declare const XmpProfile: z.ZodObject<{
     attribution: z.ZodOptional<z.ZodString>;
     terms: z.ZodOptional<z.ZodString>;
 }, z.core.$strip>;
-export type XmpProfile = z.infer<typeof XmpProfile>;
+export type XmpProfile = z.infer<typeof XmpProfileSchema>;
 //# sourceMappingURL=xmp-profile.schema.d.ts.map

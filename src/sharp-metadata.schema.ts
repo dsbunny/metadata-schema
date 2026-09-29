@@ -3,7 +3,7 @@
 
 import * as z from "zod";
 
-export const FormatEnum = z.enum([
+export const FormatEnumSchema = z.enum([
 	'avif',
 	'dz',
 	'fits',
@@ -27,9 +27,9 @@ export const FormatEnum = z.enum([
 	'webp',
 ])
 	.describe('Name of decoder used to decompress image data e.g. jpeg, png, webp, gif, svg.');
-export type FormatEnum = z.infer<typeof FormatEnum>;
+export type FormatEnum = z.infer<typeof FormatEnumSchema>;
 
-export const ColourspaceEnum = z.enum([
+export const ColourspaceEnumSchema = z.enum([
 	'multiband',
 	'b-w',
 	'bw',
@@ -37,31 +37,31 @@ export const ColourspaceEnum = z.enum([
 	'srgb',
 ])
 	.describe('Name of colour space interpretation.');
-export type ColourspaceEnum = z.infer<typeof ColourspaceEnum>;
+export type ColourspaceEnum = z.infer<typeof ColourspaceEnumSchema>;
 
 // 3 for sRGB, 4 for CMYK.
-export const Channels = z.number().min(3).max(4)
+export const ChannelsSchema = z.number().min(3).max(4)
 	.describe('Number of bands e.g. 3 for sRGB, 4 for CMYK.');
-export type Channels = z.infer<typeof Channels>;
+export type Channels = z.infer<typeof ChannelsSchema>;
 
-export const LevelMetadata = z.object({
+export const LevelMetadataSchema = z.object({
 	width: z.number(),
 	height: z.number(),
 });
-export type LevelMetadata = z.infer<typeof LevelMetadata>;
+export type LevelMetadata = z.infer<typeof LevelMetadataSchema>;
 
-export const SharpMetadata = z.object({
+export const SharpMetadataSchema = z.object({
 	orientation: z.number().optional()
 		.describe('Number value of the EXIF Orientation header, if present.'),
-	format: FormatEnum.optional(),
+	format: FormatEnumSchema.optional(),
 	size: z.number().optional()
 		.describe('Total size of image in bytes.'),
 	width: z.number().optional()
 		.describe('Number of pixels wide (EXIF orientation is not taken into consideration).'),
 	height: z.number().optional()
 		.describe('Number of pixels high (EXIF orientation is not taken into consideration).'),
-	space: ColourspaceEnum.optional(),
-	channels: Channels.optional(),
+	space: ColourspaceEnumSchema.optional(),
+	channels: ChannelsSchema.optional(),
 	depth: z.string().optional()
 		.describe('Name of pixel depth format e.g. uchar, char, ushort, float ...'),
 	density: z.number().optional()
@@ -98,7 +98,7 @@ export const SharpMetadata = z.object({
 		b: z.number(),
 	}), z.number()]).optional()
 		.describe('Default background colour, if present, for PNG (bKGD) and GIF images, either an RGB Object or a single greyscale value.'),
-	levels: z.array(LevelMetadata).optional()
+	levels: z.array(LevelMetadataSchema).optional()
 		.describe('Details of each level in a multi-level image provided as an array of objects.'),
 	subifds: z.number().optional()
 		.describe('Number of Sub Image File Directories in an OME-TIFF image.'),
@@ -108,4 +108,4 @@ export const SharpMetadata = z.object({
 		.describe('String containing format for images loaded via *magick.'),
 })
 	.describe('Metadata from the sharp image processing library.');
-export type SharpMetadata = z.infer<typeof SharpMetadata>;
+export type SharpMetadata = z.infer<typeof SharpMetadataSchema>;

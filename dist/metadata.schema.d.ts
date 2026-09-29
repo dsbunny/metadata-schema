@@ -1,5 +1,5 @@
 import * as z from "zod";
-export declare const HintDataPosterEntry: z.ZodObject<{
+export declare const HintDataPosterEntrySchema: z.ZodObject<{
     quality: z.ZodEnum<{
         medium: "medium";
         high: "high";
@@ -8,8 +8,8 @@ export declare const HintDataPosterEntry: z.ZodObject<{
     width: z.ZodNumber;
     height: z.ZodNumber;
 }, z.core.$strip>;
-export type HintDataPosterEntry = z.infer<typeof HintDataPosterEntry>;
-export declare const HintData: z.ZodObject<{
+export type HintDataPosterEntry = z.infer<typeof HintDataPosterEntrySchema>;
+export declare const HintDataSchema: z.ZodObject<{
     type: z.ZodLiteral<"hint">;
     poster: z.ZodArray<z.ZodObject<{
         quality: z.ZodEnum<{
@@ -21,8 +21,8 @@ export declare const HintData: z.ZodObject<{
         height: z.ZodNumber;
     }, z.core.$strip>>;
 }, z.core.$strip>;
-export type HintData = z.infer<typeof HintData>;
-export declare const FileMetadata: z.ZodObject<{
+export type HintData = z.infer<typeof HintDataSchema>;
+export declare const FileMetadataSchema: z.ZodObject<{
     type: z.ZodLiteral<"file">;
     hint: z.ZodOptional<z.ZodObject<{
         type: z.ZodLiteral<"hint">;
@@ -54,8 +54,8 @@ export declare const FileMetadata: z.ZodObject<{
     }, z.core.$strip>;
     tags: z.ZodOptional<z.ZodArray<z.ZodString>>;
 }, z.core.$strip>;
-export type FileMetadata = z.infer<typeof FileMetadata>;
-export declare const ImageMetadata: z.ZodObject<{
+export type FileMetadata = z.infer<typeof FileMetadataSchema>;
+export declare const ImageMetadataSchema: z.ZodObject<{
     type: z.ZodLiteral<"image">;
     sharp: z.ZodObject<{
         orientation: z.ZodOptional<z.ZodNumber>;
@@ -635,8 +635,8 @@ export declare const ImageMetadata: z.ZodObject<{
     }, z.core.$strip>;
     tags: z.ZodOptional<z.ZodArray<z.ZodString>>;
 }, z.core.$strip>;
-export type ImageMetadata = z.infer<typeof ImageMetadata>;
-export declare const TextureMetadata: z.ZodObject<{
+export type ImageMetadata = z.infer<typeof ImageMetadataSchema>;
+export declare const TextureMetadataSchema: z.ZodObject<{
     type: z.ZodLiteral<"texture">;
     ktx: z.ZodOptional<z.ZodObject<{
         $schema: z.ZodOptional<z.ZodString>;
@@ -1222,8 +1222,8 @@ export declare const TextureMetadata: z.ZodObject<{
     }, z.core.$strip>;
     tags: z.ZodOptional<z.ZodArray<z.ZodString>>;
 }, z.core.$strip>;
-export type TextureMetadata = z.infer<typeof TextureMetadata>;
-export declare const VideoMetadata: z.ZodObject<{
+export type TextureMetadata = z.infer<typeof TextureMetadataSchema>;
+export declare const VideoMetadataSchema: z.ZodObject<{
     type: z.ZodLiteral<"video">;
     ffprobe: z.ZodObject<{
         streams: z.ZodArray<z.ZodObject<{
@@ -1333,8 +1333,8 @@ export declare const VideoMetadata: z.ZodObject<{
     }, z.core.$strip>;
     tags: z.ZodOptional<z.ZodArray<z.ZodString>>;
 }, z.core.$strip>;
-export type VideoMetadata = z.infer<typeof VideoMetadata>;
-export declare const RejectedMetadata: z.ZodObject<{
+export type VideoMetadata = z.infer<typeof VideoMetadataSchema>;
+export declare const RejectedMetadataSchema: z.ZodObject<{
     type: z.ZodLiteral<"rejected">;
     error_text: z.ZodString;
     file: z.ZodObject<{
@@ -1355,8 +1355,8 @@ export declare const RejectedMetadata: z.ZodObject<{
     }, z.core.$strip>;
     tags: z.ZodOptional<z.ZodArray<z.ZodString>>;
 }, z.core.$strip>;
-export type RejectedMetadata = z.infer<typeof RejectedMetadata>;
-export declare const Metadata: z.ZodDiscriminatedUnion<[z.ZodObject<{
+export type RejectedMetadata = z.infer<typeof RejectedMetadataSchema>;
+export declare const MetadataSchema: z.ZodDiscriminatedUnion<[z.ZodObject<{
     type: z.ZodLiteral<"file">;
     hint: z.ZodOptional<z.ZodObject<{
         type: z.ZodLiteral<"hint">;
@@ -2681,8 +2681,8 @@ export declare const Metadata: z.ZodDiscriminatedUnion<[z.ZodObject<{
     }, z.core.$strip>;
     tags: z.ZodOptional<z.ZodArray<z.ZodString>>;
 }, z.core.$strip>], "type">;
-export type Metadata = z.infer<typeof Metadata>;
-export declare const MetadataMetadata: z.ZodObject<{
+export type Metadata = z.infer<typeof MetadataSchema>;
+export declare const MetadataMetadataSchema: z.ZodObject<{
     type: z.ZodLiteral<"metadata">;
     timings: z.ZodObject<{
         metadata_http_duration: z.ZodNumber;
@@ -2701,8 +2701,8 @@ export declare const MetadataMetadata: z.ZodObject<{
     }, z.core.$strip>;
     tags: z.ZodOptional<z.ZodArray<z.ZodString>>;
 }, z.core.$strip>;
-export type MetadataMetadata = z.infer<typeof MetadataMetadata>;
-export declare const PosterMetadataEntry: z.ZodObject<{
+export type MetadataMetadata = z.infer<typeof MetadataMetadataSchema>;
+export declare const PosterMetadataEntrySchema: z.ZodObject<{
     type: z.ZodLiteral<"poster-image">;
     quality: z.ZodEnum<{
         medium: "medium";
@@ -2734,8 +2734,8 @@ export declare const PosterMetadataEntry: z.ZodObject<{
     }, z.core.$strip>;
     tags: z.ZodOptional<z.ZodArray<z.ZodString>>;
 }, z.core.$strip>;
-export type PosterMetadataEntry = z.infer<typeof PosterMetadataEntry>;
-export declare const PosterMetadata: z.ZodObject<{
+export type PosterMetadataEntry = z.infer<typeof PosterMetadataEntrySchema>;
+export declare const PosterMetadataSchema: z.ZodObject<{
     type: z.ZodLiteral<"poster">;
     poster: z.ZodArray<z.ZodObject<{
         type: z.ZodLiteral<"poster-image">;
@@ -2770,8 +2770,8 @@ export declare const PosterMetadata: z.ZodObject<{
         tags: z.ZodOptional<z.ZodArray<z.ZodString>>;
     }, z.core.$strip>>;
 }, z.core.$strip>;
-export type PosterMetadata = z.infer<typeof PosterMetadata>;
-export declare const AnimatedPosterMetadataEntry: z.ZodObject<{
+export type PosterMetadata = z.infer<typeof PosterMetadataSchema>;
+export declare const AnimatedPosterMetadataEntrySchema: z.ZodObject<{
     type: z.ZodLiteral<"animated-poster-image">;
     width: z.ZodNumber;
     height: z.ZodNumber;
@@ -2794,8 +2794,8 @@ export declare const AnimatedPosterMetadataEntry: z.ZodObject<{
     }, z.core.$strip>;
     tags: z.ZodOptional<z.ZodArray<z.ZodString>>;
 }, z.core.$strip>;
-export type AnimatedPosterMetadataEntry = z.infer<typeof AnimatedPosterMetadataEntry>;
-export declare const AnimatedPosterMetadata: z.ZodObject<{
+export type AnimatedPosterMetadataEntry = z.infer<typeof AnimatedPosterMetadataEntrySchema>;
+export declare const AnimatedPosterMetadataSchema: z.ZodObject<{
     type: z.ZodLiteral<"animated-poster">;
     poster: z.ZodObject<{
         type: z.ZodLiteral<"animated-poster-image">;
@@ -2821,8 +2821,8 @@ export declare const AnimatedPosterMetadata: z.ZodObject<{
         tags: z.ZodOptional<z.ZodArray<z.ZodString>>;
     }, z.core.$strip>;
 }, z.core.$strip>;
-export type AnimatedPosterMetadata = z.infer<typeof AnimatedPosterMetadata>;
-export declare const PosterSeriesMetadataEntry: z.ZodObject<{
+export type AnimatedPosterMetadata = z.infer<typeof AnimatedPosterMetadataSchema>;
+export declare const PosterSeriesMetadataEntrySchema: z.ZodObject<{
     type: z.ZodLiteral<"poster-series-image">;
     index: z.ZodNumber;
     quality: z.ZodEnum<{
@@ -2854,8 +2854,8 @@ export declare const PosterSeriesMetadataEntry: z.ZodObject<{
     }, z.core.$strip>;
     tags: z.ZodOptional<z.ZodArray<z.ZodString>>;
 }, z.core.$strip>;
-export type PosterSeriesMetadataEntry = z.infer<typeof PosterSeriesMetadataEntry>;
-export declare const PosterSeriesMetadata: z.ZodObject<{
+export type PosterSeriesMetadataEntry = z.infer<typeof PosterSeriesMetadataEntrySchema>;
+export declare const PosterSeriesMetadataSchema: z.ZodObject<{
     type: z.ZodLiteral<"poster-series">;
     series: z.ZodArray<z.ZodObject<{
         type: z.ZodLiteral<"poster-series-image">;
@@ -2890,8 +2890,8 @@ export declare const PosterSeriesMetadata: z.ZodObject<{
         tags: z.ZodOptional<z.ZodArray<z.ZodString>>;
     }, z.core.$strip>>;
 }, z.core.$strip>;
-export type PosterSeriesMetadata = z.infer<typeof PosterSeriesMetadata>;
-export declare const TileSeriesMetadataEntry: z.ZodObject<{
+export type PosterSeriesMetadata = z.infer<typeof PosterSeriesMetadataSchema>;
+export declare const TileSeriesMetadataEntrySchema: z.ZodObject<{
     type: z.ZodLiteral<"tile-series-image">;
     index: z.ZodNumber;
     count: z.ZodNumber;
@@ -2918,8 +2918,8 @@ export declare const TileSeriesMetadataEntry: z.ZodObject<{
     }, z.core.$strip>;
     tags: z.ZodOptional<z.ZodArray<z.ZodString>>;
 }, z.core.$strip>;
-export type TileSeriesMetadataEntry = z.infer<typeof TileSeriesMetadataEntry>;
-export declare const TileSeriesMetadata: z.ZodObject<{
+export type TileSeriesMetadataEntry = z.infer<typeof TileSeriesMetadataEntrySchema>;
+export declare const TileSeriesMetadataSchema: z.ZodObject<{
     type: z.ZodLiteral<"tile-series">;
     series: z.ZodArray<z.ZodObject<{
         type: z.ZodLiteral<"tile-series-image">;
@@ -2955,8 +2955,8 @@ export declare const TileSeriesMetadata: z.ZodObject<{
         tile_series_sharp_duration: z.ZodOptional<z.ZodNumber>;
     }, z.core.$strip>;
 }, z.core.$strip>;
-export type TileSeriesMetadata = z.infer<typeof TileSeriesMetadata>;
-export declare const TileSeriesMetadataMetadata: z.ZodObject<{
+export type TileSeriesMetadata = z.infer<typeof TileSeriesMetadataSchema>;
+export declare const TileSeriesMetadataMetadataSchema: z.ZodObject<{
     type: z.ZodLiteral<"tile-series-metadata">;
     timings: z.ZodObject<{
         metadata_http_duration: z.ZodNumber;
@@ -2975,8 +2975,8 @@ export declare const TileSeriesMetadataMetadata: z.ZodObject<{
     }, z.core.$strip>;
     tags: z.ZodOptional<z.ZodArray<z.ZodString>>;
 }, z.core.$strip>;
-export type TileSeriesMetadataMetadata = z.infer<typeof TileSeriesMetadataMetadata>;
-export declare const PrevueMetadataEntry: z.ZodObject<{
+export type TileSeriesMetadataMetadata = z.infer<typeof TileSeriesMetadataMetadataSchema>;
+export declare const PrevueMetadataEntrySchema: z.ZodObject<{
     type: z.ZodLiteral<"prevue-video">;
     width: z.ZodNumber;
     height: z.ZodNumber;
@@ -2999,8 +2999,8 @@ export declare const PrevueMetadataEntry: z.ZodObject<{
     }, z.core.$strip>;
     tags: z.ZodOptional<z.ZodArray<z.ZodString>>;
 }, z.core.$strip>;
-export type PrevueMetadataEntry = z.infer<typeof PrevueMetadataEntry>;
-export declare const PrevueMetadata: z.ZodObject<{
+export type PrevueMetadataEntry = z.infer<typeof PrevueMetadataEntrySchema>;
+export declare const PrevueMetadataSchema: z.ZodObject<{
     type: z.ZodLiteral<"prevue">;
     prevue: z.ZodObject<{
         type: z.ZodLiteral<"prevue-video">;
@@ -3026,8 +3026,8 @@ export declare const PrevueMetadata: z.ZodObject<{
         tags: z.ZodOptional<z.ZodArray<z.ZodString>>;
     }, z.core.$strip>;
 }, z.core.$strip>;
-export type PrevueMetadata = z.infer<typeof PrevueMetadata>;
-export declare const PreviewMetadata: z.ZodDiscriminatedUnion<[z.ZodObject<{
+export type PrevueMetadata = z.infer<typeof PrevueMetadataSchema>;
+export declare const PreviewMetadataSchema: z.ZodDiscriminatedUnion<[z.ZodObject<{
     type: z.ZodLiteral<"poster">;
     poster: z.ZodArray<z.ZodObject<{
         type: z.ZodLiteral<"poster-image">;
@@ -3164,8 +3164,8 @@ export declare const PreviewMetadata: z.ZodDiscriminatedUnion<[z.ZodObject<{
         tags: z.ZodOptional<z.ZodArray<z.ZodString>>;
     }, z.core.$strip>;
 }, z.core.$strip>], "type">;
-export type PreviewMetadata = z.infer<typeof PreviewMetadata>;
-export declare const AllMetadata: z.ZodUnion<readonly [z.ZodObject<{
+export type PreviewMetadata = z.infer<typeof PreviewMetadataSchema>;
+export declare const AllMetadataSchema: z.ZodUnion<readonly [z.ZodObject<{
     type: z.ZodLiteral<"metadata">;
     timings: z.ZodObject<{
         metadata_http_duration: z.ZodNumber;
@@ -3320,5 +3320,5 @@ export declare const AllMetadata: z.ZodUnion<readonly [z.ZodObject<{
         tags: z.ZodOptional<z.ZodArray<z.ZodString>>;
     }, z.core.$strip>;
 }, z.core.$strip>], "type">]>;
-export type AllMetadata = z.infer<typeof AllMetadata>;
+export type AllMetadata = z.infer<typeof AllMetadataSchema>;
 //# sourceMappingURL=metadata.schema.d.ts.map

@@ -2,38 +2,38 @@
 // Internal performance timings
 import * as z from "zod";
 // #region Base
-export const FileTimings = z.object({
+export const FileTimingsSchema = z.object({
     file_http_duration: z.number()
         .describe('Time taken to download the file from the HTTP server.'),
     file_ck_duration: z.number()
         .describe('Time taken to calculate the checksum of the file.'),
 })
     .describe('Performance timings for the file.');
-export const ImageTimings = FileTimings.extend({
+export const ImageTimingsSchema = FileTimingsSchema.extend({
     image_sharp_duration: z.number()
         .describe('Time taken to probe the image using sharp.'),
     image_ffprobe_duration: z.number()
         .describe('Time taken to probe the image using ffprobe.'),
 })
     .describe('Performance timings for the image.');
-export const TextureTimings = FileTimings.extend({
+export const TextureTimingsSchema = FileTimingsSchema.extend({
     texture_ktxinfo_duration: z.number()
         .describe('Time taken to probe the KTX texture information.'),
 })
     .describe('Performance timings for the texture.');
-export const VideoTimings = FileTimings.extend({
+export const VideoTimingsSchema = FileTimingsSchema.extend({
     video_ffprobe_duration: z.number()
         .describe('Time taken to probe the image using ffprobe.'),
 })
     .describe('Performance timings for the image.');
-export const MetadataTimings = z.object({
+export const MetadataTimingsSchema = z.object({
     metadata_http_duration: z.number()
         .describe('Time taken to upload the metadata to the HTTP server.'),
 })
     .describe('Performance timings for the metadata.');
 // #endregion
 // #region Preview
-export const PosterTimings = z.object({
+export const PosterTimingsSchema = z.object({
     poster_canvas_duration: z.number().optional()
         .describe('Time taken to generate the poster using node-canvas.'),
     poster_ffmpeg_duration: z.number().optional()
@@ -48,7 +48,7 @@ export const PosterTimings = z.object({
         .describe('Time taken to upload the poster to the HTTP server.'),
 })
     .describe('Performance timings for the poster.');
-export const AnimatedPosterTimings = z.object({
+export const AnimatedPosterTimingsSchema = z.object({
     animated_poster_ffmpeg_duration: z.number()
         .describe('Time taken to generate the animated poster using ffmpeg.'),
     animated_poster_ck_duration: z.number()
@@ -57,7 +57,7 @@ export const AnimatedPosterTimings = z.object({
         .describe('Time taken to upload the animated poster to the HTTP server.'),
 })
     .describe('Performance timings for the animated poster.');
-export const PosterSeriesTimings = z.object({
+export const PosterSeriesTimingsSchema = z.object({
     poster_series_ffmpeg_duration: z.number()
         .describe('Time taken to generate the poster series using ffmpeg.'),
     poster_series_avifenc_duration: z.number().optional()
@@ -70,14 +70,14 @@ export const PosterSeriesTimings = z.object({
         .describe('Time taken to upload the poster series to the HTTP server.'),
 })
     .describe('Performance timings for the poster series.');
-export const TileSeriesImageTimings = z.object({
+export const TileSeriesImageTimingsSchema = z.object({
     tile_series_ck_duration: z.number()
         .describe('Time taken to calculate the checksum of the tile series.'),
     tile_series_http_duration: z.number()
         .describe('Time taken to upload the tile series to the HTTP server.'),
 })
     .describe('Performance timings for the tile series.');
-export const TileSeriesTimings = z.object({
+export const TileSeriesTimingsSchema = z.object({
     tile_series_ffprobe_duration: z.number()
         .describe('Time taken to probe the video using ffprobe.'),
     tile_series_ffmpeg_duration: z.number()
@@ -88,7 +88,7 @@ export const TileSeriesTimings = z.object({
         .describe('Time taken to convert the tile series using sharp.'),
 })
     .describe('Performance timings for the tile series set.');
-export const PrevueTimings = z.object({
+export const PrevueTimingsSchema = z.object({
     prevue_ffmpeg_duration: z.number()
         .describe('Time taken to generate the prevue using ffmpeg.'),
     prevue_ck_duration: z.number()

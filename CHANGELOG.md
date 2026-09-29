@@ -1,4 +1,7 @@
 # Changelog
+## v9.0.22
+- Split schema definitions to separate Schema suffix to resolve vsCode and tooling confusion.
+
 ## v8.2.21
 - Bump to `zod@4.3.6`.
 - Additional schemas for array entries.

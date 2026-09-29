@@ -1,5 +1,5 @@
 import * as z from "zod";
-export declare const FfprobeStreamDisposition: z.ZodObject<{
+export declare const FfprobeStreamDispositionSchema: z.ZodObject<{
     default: z.ZodOptional<z.ZodNumber>;
     dub: z.ZodOptional<z.ZodNumber>;
     original: z.ZodOptional<z.ZodNumber>;
@@ -13,8 +13,8 @@ export declare const FfprobeStreamDisposition: z.ZodObject<{
     attached_pic: z.ZodOptional<z.ZodNumber>;
     timed_thumbnails: z.ZodOptional<z.ZodNumber>;
 }, z.core.$strip>;
-export type FfprobeStreamDisposition = z.infer<typeof FfprobeStreamDisposition>;
-export declare const FfprobeStream: z.ZodObject<{
+export type FfprobeStreamDisposition = z.infer<typeof FfprobeStreamDispositionSchema>;
+export declare const FfprobeStreamSchema: z.ZodObject<{
     index: z.ZodNumber;
     codec_name: z.ZodOptional<z.ZodString>;
     codec_long_name: z.ZodOptional<z.ZodString>;
@@ -75,8 +75,8 @@ export declare const FfprobeStream: z.ZodObject<{
     }, z.core.$strip>>;
     rotation: z.ZodOptional<z.ZodUnion<readonly [z.ZodString, z.ZodNumber]>>;
 }, z.core.$strip>;
-export type FfprobeStream = z.infer<typeof FfprobeStream>;
-export declare const FfprobeFormat: z.ZodObject<{
+export type FfprobeStream = z.infer<typeof FfprobeStreamSchema>;
+export declare const FfprobeFormatSchema: z.ZodObject<{
     filename: z.ZodOptional<z.ZodString>;
     nb_streams: z.ZodOptional<z.ZodNumber>;
     nb_programs: z.ZodOptional<z.ZodNumber>;
@@ -89,8 +89,8 @@ export declare const FfprobeFormat: z.ZodObject<{
     probe_score: z.ZodOptional<z.ZodNumber>;
     tags: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnion<readonly [z.ZodString, z.ZodNumber]>>>;
 }, z.core.$strip>;
-export type FfprobeFormat = z.infer<typeof FfprobeFormat>;
-export declare const FfprobeData: z.ZodObject<{
+export type FfprobeFormat = z.infer<typeof FfprobeFormatSchema>;
+export declare const FfprobeDataSchema: z.ZodObject<{
     streams: z.ZodArray<z.ZodObject<{
         index: z.ZodNumber;
         codec_name: z.ZodOptional<z.ZodString>;
@@ -166,5 +166,5 @@ export declare const FfprobeData: z.ZodObject<{
         tags: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnion<readonly [z.ZodString, z.ZodNumber]>>>;
     }, z.core.$strip>;
 }, z.core.$strip>;
-export type FfprobeData = z.infer<typeof FfprobeData>;
+export type FfprobeData = z.infer<typeof FfprobeDataSchema>;
 //# sourceMappingURL=ffprobe-data.schema.d.ts.map

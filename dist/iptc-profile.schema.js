@@ -1,7 +1,7 @@
 // vim: tabstop=8 softtabstop=0 noexpandtab shiftwidth=8 nosmarttab
 // Derived from iptc-reader/index.js.
 import * as z from "zod";
-export const IptcProfile = z.object({
+export const IptcProfileSchema = z.object({
     title: z.string().optional()
         .describe('Title of the image'),
     caption: z.string().optional()

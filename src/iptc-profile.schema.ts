@@ -3,7 +3,7 @@
 
 import * as z from "zod";
 
-export const IptcProfile = z.object({
+export const IptcProfileSchema = z.object({
 	title: z.string().optional()
 		.describe('Title of the image'),
 	caption: z.string().optional()
@@ -28,4 +28,4 @@ export const IptcProfile = z.object({
 		.describe('Category of the image'),
 })
 	.describe('Metadata from the IPTC standard.');
-export type IptcProfile = z.infer<typeof IptcProfile>;
+export type IptcProfile = z.infer<typeof IptcProfileSchema>;

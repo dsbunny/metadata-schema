@@ -1,5 +1,5 @@
 import * as z from "zod";
-export declare const ExifMetadata: z.ZodObject<{
+export declare const ExifMetadataSchema: z.ZodObject<{
     Image: z.ZodOptional<z.ZodObject<{
         ProcessingSoftware: z.ZodOptional<z.ZodString>;
         NewSubfileType: z.ZodOptional<z.ZodNumber>;
@@ -334,5 +334,5 @@ export declare const ExifMetadata: z.ZodObject<{
         GPSHPositioningError: z.ZodOptional<z.ZodNumber>;
     }, z.core.$strip>>;
 }, z.core.$strip>;
-export type ExifMetadata = z.infer<typeof ExifMetadata>;
+export type ExifMetadata = z.infer<typeof ExifMetadataSchema>;
 //# sourceMappingURL=exif-metadata.schema.d.ts.map

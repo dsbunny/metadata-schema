@@ -1,5 +1,5 @@
 import * as z from "zod";
-export declare const IccProfile: z.ZodObject<{
+export declare const IccProfileSchema: z.ZodObject<{
     version: z.ZodEnum<{
         "2.0": "2.0";
         2.1: "2.1";
@@ -44,5 +44,5 @@ export declare const IccProfile: z.ZodObject<{
     viewingConditionsDescription: z.ZodOptional<z.ZodString>;
     whitepoint: z.ZodOptional<z.ZodTuple<[z.ZodNumber, z.ZodNumber, z.ZodNumber], null>>;
 }, z.core.$strip>;
-export type IccProfile = z.infer<typeof IccProfile>;
+export type IccProfile = z.infer<typeof IccProfileSchema>;
 //# sourceMappingURL=icc-profile.schema.d.ts.map

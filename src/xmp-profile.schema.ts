@@ -3,7 +3,7 @@
 
 import * as z from "zod";
 
-export const XmpProfile = z.object({
+export const XmpProfileSchema = z.object({
 	keywords: z.array(z.string()).optional()
 		.describe('Keywords associated with the image.'),
 	title: z.string().optional()
@@ -22,4 +22,4 @@ export const XmpProfile = z.object({
 		.describe('The terms of the image.'),
 })
 	.describe('Metadata from the XMP standard.');
-export type XmpProfile = z.infer<typeof XmpProfile>;
+export type XmpProfile = z.infer<typeof XmpProfileSchema>;

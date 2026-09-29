@@ -1,125 +1,125 @@
 // vim: tabstop=8 softtabstop=0 noexpandtab shiftwidth=8 nosmarttab
 import * as z from "zod";
 import { KTXInfoSchema } from '@dsbunny/ktx-schema';
-import { SharpMetadata } from './sharp-metadata.schema.js';
-import { ExifMetadata } from './exif-metadata.schema.js';
-import { IccProfile } from './icc-profile.schema.js';
-import { IptcProfile } from './iptc-profile.schema.js';
-import { XmpProfile } from './xmp-profile.schema.js';
-import { FfprobeData } from './ffprobe-data.schema.js';
-import { AnimatedPosterTimings, FileTimings, ImageTimings, MetadataTimings, PosterSeriesTimings, PosterTimings, PrevueTimings, TextureTimings, TileSeriesTimings, TileSeriesImageTimings, VideoTimings, } from './timings.schema.js';
-import { FileStatAndChecksums } from './file.schema.js';
+import { SharpMetadataSchema } from './sharp-metadata.schema.js';
+import { ExifMetadataSchema } from './exif-metadata.schema.js';
+import { IccProfileSchema } from './icc-profile.schema.js';
+import { IptcProfileSchema } from './iptc-profile.schema.js';
+import { XmpProfileSchema } from './xmp-profile.schema.js';
+import { FfprobeDataSchema } from './ffprobe-data.schema.js';
+import { AnimatedPosterTimingsSchema, FileTimingsSchema, ImageTimingsSchema, MetadataTimingsSchema, PosterSeriesTimingsSchema, PosterTimingsSchema, PrevueTimingsSchema, TextureTimingsSchema, TileSeriesTimingsSchema, TileSeriesImageTimingsSchema, VideoTimingsSchema, } from './timings.schema.js';
+import { FileStatAndChecksumsSchema } from './file.schema.js';
 // #region Metadata
 // Base metadata for all files.
 const BaseMetadata = {
     type: z.literal('base'),
-    file: FileStatAndChecksums,
-    timings: FileTimings,
+    file: FileStatAndChecksumsSchema,
+    timings: FileTimingsSchema,
     tags: z.array(z.string().max(64)).max(100).optional(),
 };
-export const HintDataPosterEntry = z.object({
+export const HintDataPosterEntrySchema = z.object({
     quality: z.enum(['medium', 'high', 'sample']),
     width: z.number().int().positive(),
     height: z.number().int().positive(),
 })
     .describe('A single entry in the hint poster array.');
-export const HintData = z.object({
+export const HintDataSchema = z.object({
     type: z.literal('hint'),
-    poster: z.array(HintDataPosterEntry),
+    poster: z.array(HintDataPosterEntrySchema),
 })
     .describe('Hint data for assets.');
-export const FileMetadata = z.object({
+export const FileMetadataSchema = z.object({
     ...BaseMetadata,
     type: z.literal('file'),
-    hint: HintData.optional(),
+    hint: HintDataSchema.optional(),
 });
-export const ImageMetadata = z.object({
+export const ImageMetadataSchema = z.object({
     ...BaseMetadata,
     type: z.literal('image'),
-    sharp: SharpMetadata,
-    exif: ExifMetadata.optional(),
-    icc: IccProfile.optional(),
-    iptc: IptcProfile.optional(),
-    xmp: XmpProfile.optional(),
-    ffprobe: FfprobeData,
-    hint: HintData.optional(),
-    timings: ImageTimings,
+    sharp: SharpMetadataSchema,
+    exif: ExifMetadataSchema.optional(),
+    icc: IccProfileSchema.optional(),
+    iptc: IptcProfileSchema.optional(),
+    xmp: XmpProfileSchema.optional(),
+    ffprobe: FfprobeDataSchema,
+    hint: HintDataSchema.optional(),
+    timings: ImageTimingsSchema,
 })
     .describe('Metadata for an image file.');
-export const TextureMetadata = z.object({
+export const TextureMetadataSchema = z.object({
     ...BaseMetadata,
     type: z.literal('texture'),
     ktx: KTXInfoSchema.optional(),
-    hint: HintData.optional(),
-    timings: TextureTimings,
+    hint: HintDataSchema.optional(),
+    timings: TextureTimingsSchema,
 })
     .describe('Metadata for a texture file.');
-export const VideoMetadata = z.object({
+export const VideoMetadataSchema = z.object({
     ...BaseMetadata,
     type: z.literal('video'),
-    ffprobe: FfprobeData
+    ffprobe: FfprobeDataSchema
         .describe('Metadata from the ffprobe tool.'),
     codecs: z.array(z.string().max(255)).optional()
         .describe('The codecs used in the video file, per RFC 6381.'),
-    hint: HintData.optional(),
-    timings: VideoTimings,
+    hint: HintDataSchema.optional(),
+    timings: VideoTimingsSchema,
 })
     .describe('Metadata for a video file.');
 // Media types that are not supported, primarily due to technical limitations.
 // Media can be rejected due to check rules.
-export const RejectedMetadata = z.object({
+export const RejectedMetadataSchema = z.object({
     ...BaseMetadata,
     type: z.literal('rejected'),
     error_text: z.string(),
 })
     .describe('Metadata for an rejected file.');
 // Union of all metadata types.
-export const Metadata = z.discriminatedUnion("type", [
-    FileMetadata,
-    ImageMetadata,
-    TextureMetadata,
-    VideoMetadata,
-    RejectedMetadata,
+export const MetadataSchema = z.discriminatedUnion("type", [
+    FileMetadataSchema,
+    ImageMetadataSchema,
+    TextureMetadataSchema,
+    VideoMetadataSchema,
+    RejectedMetadataSchema,
 ])
     .describe('Union of all metadata types.');
 // Encapsulation of metadata in a S3 object.
-export const MetadataMetadata = z.object({
+export const MetadataMetadataSchema = z.object({
     ...BaseMetadata,
     type: z.literal('metadata'),
-    timings: MetadataTimings,
+    timings: MetadataTimingsSchema,
 })
     .describe('Metadata for a metadata object.');
 // #endregion
 // #region Preview
-export const PosterMetadataEntry = z.object({
+export const PosterMetadataEntrySchema = z.object({
     ...BaseMetadata,
     type: z.literal('poster-image'),
     quality: z.enum(['medium', 'high', 'sample']),
     width: z.number().int().positive(),
     height: z.number().int().positive(),
     blurhash: z.string().optional(),
-    timings: PosterTimings,
+    timings: PosterTimingsSchema,
 })
     .describe('A single entry in the poster array.');
-export const PosterMetadata = z.object({
+export const PosterMetadataSchema = z.object({
     type: z.literal('poster'),
-    poster: z.array(PosterMetadataEntry),
+    poster: z.array(PosterMetadataEntrySchema),
 })
     .describe('Metadata for an image poster.');
-export const AnimatedPosterMetadataEntry = z.object({
+export const AnimatedPosterMetadataEntrySchema = z.object({
     ...BaseMetadata,
     type: z.literal('animated-poster-image'),
     width: z.number().int().positive(),
     height: z.number().int().positive(),
-    timings: AnimatedPosterTimings,
+    timings: AnimatedPosterTimingsSchema,
 })
     .describe('A single entry in the animated poster array.');
-export const AnimatedPosterMetadata = z.object({
+export const AnimatedPosterMetadataSchema = z.object({
     type: z.literal('animated-poster'),
-    poster: AnimatedPosterMetadataEntry,
+    poster: AnimatedPosterMetadataEntrySchema,
 })
     .describe('Metadata for an animated poster.');
-export const PosterSeriesMetadataEntry = z.object({
+export const PosterSeriesMetadataEntrySchema = z.object({
     ...BaseMetadata,
     type: z.literal('poster-series-image'),
     index: z.number().int().min(1).max(3),
@@ -127,15 +127,15 @@ export const PosterSeriesMetadataEntry = z.object({
     width: z.number().int().positive(),
     height: z.number().int().positive(),
     blurhash: z.string().optional(),
-    timings: PosterSeriesTimings,
+    timings: PosterSeriesTimingsSchema,
 })
     .describe('A single entry in the poster series array.');
-export const PosterSeriesMetadata = z.object({
+export const PosterSeriesMetadataSchema = z.object({
     type: z.literal('poster-series'),
-    series: z.array(PosterSeriesMetadataEntry),
+    series: z.array(PosterSeriesMetadataEntrySchema),
 })
     .describe('Metadata for an image poster series.');
-export const TileSeriesMetadataEntry = z.object({
+export const TileSeriesMetadataEntrySchema = z.object({
     ...BaseMetadata,
     type: z.literal('tile-series-image'),
     index: z.number().int().min(1).max(9999),
@@ -143,47 +143,47 @@ export const TileSeriesMetadataEntry = z.object({
     quality: z.enum(['low']),
     width: z.number().int().positive(),
     height: z.number().int().positive(),
-    timings: TileSeriesImageTimings,
+    timings: TileSeriesImageTimingsSchema,
 })
     .describe('A single entry in the tile series array.');
-export const TileSeriesMetadata = z.object({
+export const TileSeriesMetadataSchema = z.object({
     type: z.literal('tile-series'),
-    series: z.array(TileSeriesMetadataEntry),
-    timings: TileSeriesTimings,
+    series: z.array(TileSeriesMetadataEntrySchema),
+    timings: TileSeriesTimingsSchema,
 })
     .describe('Metadata for an image tile series.');
-export const TileSeriesMetadataMetadata = z.object({
+export const TileSeriesMetadataMetadataSchema = z.object({
     ...BaseMetadata,
     type: z.literal('tile-series-metadata'),
-    timings: MetadataTimings,
+    timings: MetadataTimingsSchema,
 })
     .describe('Metadata for an image tile series metadata.');
-export const PrevueMetadataEntry = z.object({
+export const PrevueMetadataEntrySchema = z.object({
     ...BaseMetadata,
     type: z.literal('prevue-video'),
     width: z.number().int().positive(),
     height: z.number().int().positive(),
-    timings: PrevueTimings,
+    timings: PrevueTimingsSchema,
 })
     .describe('A single entry in the prevue array.');
-export const PrevueMetadata = z.object({
+export const PrevueMetadataSchema = z.object({
     type: z.literal('prevue'),
-    prevue: PrevueMetadataEntry,
+    prevue: PrevueMetadataEntrySchema,
 })
     .describe('Metadata for a video prevue.');
 // Union of all preview metadata types.
-export const PreviewMetadata = z.discriminatedUnion("type", [
-    PosterMetadata,
-    AnimatedPosterMetadata,
-    PosterSeriesMetadata,
-    TileSeriesMetadataMetadata,
-    PrevueMetadata,
+export const PreviewMetadataSchema = z.discriminatedUnion("type", [
+    PosterMetadataSchema,
+    AnimatedPosterMetadataSchema,
+    PosterSeriesMetadataSchema,
+    TileSeriesMetadataMetadataSchema,
+    PrevueMetadataSchema,
 ])
     .describe('Union of all preview metadata types.');
 z;
-export const AllMetadata = z.union([
-    MetadataMetadata,
-    PreviewMetadata,
+export const AllMetadataSchema = z.union([
+    MetadataMetadataSchema,
+    PreviewMetadataSchema,
 ])
     .describe('Union of all metadata types.');
 // #endregion

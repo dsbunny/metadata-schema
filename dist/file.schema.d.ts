@@ -1,5 +1,5 @@
 import * as z from "zod";
-export declare const FileStatAndChecksums: z.ZodObject<{
+export declare const FileStatAndChecksumsSchema: z.ZodObject<{
     s3_filename: z.ZodString;
     content_type: z.ZodString;
     size: z.ZodNumber;
@@ -11,5 +11,5 @@ export declare const FileStatAndChecksums: z.ZodObject<{
     s3_etag: z.ZodString;
     s3_parts: z.ZodArray<z.ZodNumber>;
 }, z.core.$strip>;
-export type FileStatAndChecksums = z.infer<typeof FileStatAndChecksums>;
+export type FileStatAndChecksums = z.infer<typeof FileStatAndChecksumsSchema>;
 //# sourceMappingURL=file.schema.d.ts.map

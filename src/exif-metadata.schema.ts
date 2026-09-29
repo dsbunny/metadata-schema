@@ -3,7 +3,7 @@
 
 import * as z from "zod";
 
-const ImageTags = z.object({
+const ImageTagsSchema = z.object({
 	ProcessingSoftware: z.string()
 		.describe('The name and version of the software used to post-process the picture.'),
 	NewSubfileType: z.number()
@@ -467,7 +467,7 @@ const ImageTags = z.object({
 })
 	.describe('Contains EXIF tags for Image group (IFD).');
 
-const PhotoTags = z.object({
+const PhotoTagsSchema = z.object({
 	ExposureTime: z.number()
 		.describe('Exposure time, given in seconds (sec).'),
 	FNumber: z.number()
@@ -622,7 +622,7 @@ const PhotoTags = z.object({
 })
 	.describe('Contains EXIF tags for Photo group (IFD).');
 
-const IopTags = z.object({
+const IopTagsSchema = z.object({
 	InteroperabilityIndex: z.string()
 		.describe('ndicates the identification of the Interoperability rule. Use "R98" for stating ExifR98 Rules. Four bytes used including the termination code (NULL). see the separate volume of Recommended Exif Interoperability Rules (ExifR98) for other tags used for ExifR98.'),
 	//InteroperabilityVersion: z.buffer()  // Code String (CS)
@@ -636,7 +636,7 @@ const IopTags = z.object({
 })
 	.describe('Contains EXIF tags for Iop group (IFD).');
 
-const GPSInfoTags = z.object({
+const GPSInfoTagsSchema = z.object({
 	GPSVersionID: z.array(z.number())
 		.describe('Indicates the version of GPSInfoIFD. The version is given as 2.0.0.0. This tag is mandatory when GPSInfo tag is present. (Note: The GPSVersionID tag is given in bytes, unlike the ExifVersion tag. When the version is 2.0.0.0, the tag value is 02000000.H).'),
 	GPSLatitudeRef: z.string()
@@ -703,12 +703,12 @@ const GPSInfoTags = z.object({
 })
 	.describe('Contains EXIF tags for GPSInfo group (IFD).');
 
-export const ExifMetadata = z.object({
-	Image: ImageTags.partial().optional(),
-	Photo: PhotoTags.partial().optional(),
-	Iop: IopTags.partial().optional(),
-	GPSInfo: GPSInfoTags.partial().optional(),
+export const ExifMetadataSchema = z.object({
+	Image: ImageTagsSchema.partial().optional(),
+	Photo: PhotoTagsSchema.partial().optional(),
+	Iop: IopTagsSchema.partial().optional(),
+	GPSInfo: GPSInfoTagsSchema.partial().optional(),
 	//ThumbnailTags: ThumbnailTags.partial().optional(),
 })
 	.describe('Metadata from the EXIF standard.');
-export type ExifMetadata = z.infer<typeof ExifMetadata>;
+export type ExifMetadata = z.infer<typeof ExifMetadataSchema>;

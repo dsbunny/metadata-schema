@@ -1,5 +1,5 @@
 import * as z from "zod";
-export declare const FormatEnum: z.ZodEnum<{
+export declare const FormatEnumSchema: z.ZodEnum<{
     input: "input";
     avif: "avif";
     dz: "dz";
@@ -22,23 +22,23 @@ export declare const FormatEnum: z.ZodEnum<{
     v: "v";
     webp: "webp";
 }>;
-export type FormatEnum = z.infer<typeof FormatEnum>;
-export declare const ColourspaceEnum: z.ZodEnum<{
+export type FormatEnum = z.infer<typeof FormatEnumSchema>;
+export declare const ColourspaceEnumSchema: z.ZodEnum<{
     multiband: "multiband";
     "b-w": "b-w";
     bw: "bw";
     cmyk: "cmyk";
     srgb: "srgb";
 }>;
-export type ColourspaceEnum = z.infer<typeof ColourspaceEnum>;
-export declare const Channels: z.ZodNumber;
-export type Channels = z.infer<typeof Channels>;
-export declare const LevelMetadata: z.ZodObject<{
+export type ColourspaceEnum = z.infer<typeof ColourspaceEnumSchema>;
+export declare const ChannelsSchema: z.ZodNumber;
+export type Channels = z.infer<typeof ChannelsSchema>;
+export declare const LevelMetadataSchema: z.ZodObject<{
     width: z.ZodNumber;
     height: z.ZodNumber;
 }, z.core.$strip>;
-export type LevelMetadata = z.infer<typeof LevelMetadata>;
-export declare const SharpMetadata: z.ZodObject<{
+export type LevelMetadata = z.infer<typeof LevelMetadataSchema>;
+export declare const SharpMetadataSchema: z.ZodObject<{
     orientation: z.ZodOptional<z.ZodNumber>;
     format: z.ZodOptional<z.ZodEnum<{
         input: "input";
@@ -105,5 +105,5 @@ export declare const SharpMetadata: z.ZodObject<{
     }>>;
     formatMagick: z.ZodOptional<z.ZodString>;
 }, z.core.$strip>;
-export type SharpMetadata = z.infer<typeof SharpMetadata>;
+export type SharpMetadata = z.infer<typeof SharpMetadataSchema>;
 //# sourceMappingURL=sharp-metadata.schema.d.ts.map
