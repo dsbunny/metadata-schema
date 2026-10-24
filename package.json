@@ -1,6 +1,6 @@
 {
 	"name": "@dsbunny/metadata-schema",
-	"version": "9.0.22",
+	"version": "9.1.23",
 	"description": "ZOD metadata for media stored in the DSBunny DAM",
 	"type": "module",
 	"main": "dist/index.js",
@@ -19,12 +19,16 @@
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"devDependencies": {
-		"@dsbunny/ktx-schema": "github:dsbunny/ktx-schema#fb077ba",
+		"@dsbunny/ktx-schema": "github:dsbunny/ktx-schema#a3425e0",
+		"@dsbunny/net-schema": "github:dsbunny/net-schema#7b9cf74",
+		"@dsbunny/zod-registry": "github:dsbunny/zod-registry#35c7ef6",
 		"typescript": "^5.9.3",
 		"zod": "^4.3.6"
 	},
 	"peerDependencies": {
 		"@dsbunny/ktx-schema": "github:dsbunny/ktx-schema",
+		"@dsbunny/net-schema": "github:dsbunny/net-schema",
+		"@dsbunny/zod-registry": "github:dsbunny/zod-registry",
 		"zod": "^4.3.0"
 	}
 }

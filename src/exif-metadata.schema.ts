@@ -2,6 +2,7 @@
 // Derived from Exif.Metadata in exif.d.ts.
 
 import * as z from "zod";
+import { dsbunnyRegistry } from '@dsbunny/zod-registry';
 
 const ImageTagsSchema = z.object({
 	ProcessingSoftware: z.string()
@@ -464,8 +465,10 @@ const ImageTagsSchema = z.object({
 	//ProfileHueSatMapData3: z.buffer(),
 	ReductionMatrix3: z.number(),
 	//RGBTables: z.buffer(),
-})
-	.describe('Contains EXIF tags for Image group (IFD).');
+}).register(dsbunnyRegistry, {
+	id: 'ImageTagsSchema',
+	description: 'Contains EXIF tags for Image group (IFD).',
+});
 
 const PhotoTagsSchema = z.object({
 	ExposureTime: z.number()
@@ -619,8 +622,10 @@ const PhotoTagsSchema = z.object({
 	SourceImageNumberOfCompositeImage: z.number(),
 	//SourceExposureTimesOfCompositeImage: z.buffer(),
 	Gamma: z.number(),
-})
-	.describe('Contains EXIF tags for Photo group (IFD).');
+}).register(dsbunnyRegistry, {
+	id: 'PhotoTagsSchema',
+	description: 'Contains EXIF tags for Photo group (IFD).',
+});
 
 const IopTagsSchema = z.object({
 	InteroperabilityIndex: z.string()
@@ -633,8 +638,10 @@ const IopTagsSchema = z.object({
 		.describe('Image width.'),
 	RelatedImageLength: z.number()
 		.describe('Image height.'),
-})
-	.describe('Contains EXIF tags for Iop group (IFD).');
+}).register(dsbunnyRegistry, {
+	id: 'IopTagsSchema',
+	description: 'Contains EXIF tags for Iop group (IFD).',
+});
 
 const GPSInfoTagsSchema = z.object({
 	GPSVersionID: z.array(z.number())
@@ -700,8 +707,10 @@ const GPSInfoTagsSchema = z.object({
 	GPSDifferential: z.number()
 		.describe('Indicates whether differential correction is applied to the GPS receiver.'),
 	GPSHPositioningError: z.number(),
-})
-	.describe('Contains EXIF tags for GPSInfo group (IFD).');
+}).register(dsbunnyRegistry, {
+	id: 'GPSInfoTagsSchema',
+	description: 'Contains EXIF tags for GPSInfo group (IFD).',
+});
 
 export const ExifMetadataSchema = z.object({
 	Image: ImageTagsSchema.partial().optional(),
@@ -709,6 +718,8 @@ export const ExifMetadataSchema = z.object({
 	Iop: IopTagsSchema.partial().optional(),
 	GPSInfo: GPSInfoTagsSchema.partial().optional(),
 	//ThumbnailTags: ThumbnailTags.partial().optional(),
-})
-	.describe('Metadata from the EXIF standard.');
+}).register(dsbunnyRegistry, {
+	id: 'ExifMetadataSchema',
+	description: 'Metadata from the EXIF standard.',
+});
 export type ExifMetadata = z.infer<typeof ExifMetadataSchema>;

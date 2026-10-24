@@ -1,6 +1,7 @@
 // vim: tabstop=8 softtabstop=0 noexpandtab shiftwidth=8 nosmarttab
 // Derived from Sharp.Metadata in sharp.d.ts.
 import * as z from "zod";
+import { dsbunnyRegistry } from '@dsbunny/zod-registry';
 export const FormatEnumSchema = z.enum([
     'avif',
     'dz',
@@ -23,22 +24,31 @@ export const FormatEnumSchema = z.enum([
     'tif',
     'v',
     'webp',
-])
-    .describe('Name of decoder used to decompress image data e.g. jpeg, png, webp, gif, svg.');
+]).register(dsbunnyRegistry, {
+    id: 'FormatEnumSchema',
+    description: 'Name of decoder used to decompress image data e.g. jpeg, png, webp, gif, svg.',
+});
 export const ColourspaceEnumSchema = z.enum([
     'multiband',
     'b-w',
     'bw',
     'cmyk',
     'srgb',
-])
-    .describe('Name of colour space interpretation.');
+]).register(dsbunnyRegistry, {
+    id: 'ColourspaceEnumSchema',
+    description: 'Name of colour space interpretation.',
+});
 // 3 for sRGB, 4 for CMYK.
-export const ChannelsSchema = z.number().min(3).max(4)
-    .describe('Number of bands e.g. 3 for sRGB, 4 for CMYK.');
+export const ChannelsSchema = z.number().min(3).max(4).register(dsbunnyRegistry, {
+    id: 'ChannelsSchema',
+    description: 'Number of bands e.g. 3 for sRGB, 4 for CMYK.',
+});
 export const LevelMetadataSchema = z.object({
     width: z.number(),
     height: z.number(),
+}).register(dsbunnyRegistry, {
+    id: 'LevelMetadataSchema',
+    description: 'Metadata for a single level in a multi-level image.',
 });
 export const SharpMetadataSchema = z.object({
     orientation: z.number().optional()
@@ -96,6 +106,8 @@ export const SharpMetadataSchema = z.object({
         .describe('The unit of resolution (density).'),
     formatMagick: z.string().optional()
         .describe('String containing format for images loaded via *magick.'),
-})
-    .describe('Metadata from the sharp image processing library.');
+}).register(dsbunnyRegistry, {
+    id: 'SharpMetadataSchema',
+    description: 'Metadata from the sharp image processing library.',
+});
 //# sourceMappingURL=sharp-metadata.schema.js.map

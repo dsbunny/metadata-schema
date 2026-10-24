@@ -1,16 +1,27 @@
 // vim: tabstop=8 softtabstop=0 noexpandtab shiftwidth=8 nosmarttab
 // Derived from icc.IccProfile in icc/index.d.ts.
 import * as z from "zod";
-const VersionSchema = z.enum(['2.0', '2.1', '2.4', '4.0', '4.2', '4.3', '4.4'])
-    .describe('The version of the ICC profile.');
-const IntentSchema = z.enum(['Perceptual', 'Relative', 'Saturation', 'Absolute'])
-    .describe('The rendering intent of the profile.');
-const DeviceClassSchema = z.enum(['Scanner', 'Monitor', 'Printer', 'Link', 'Abstract', 'Space', 'Named color'])
-    .describe('The device class of the profile.');
-const PlatformSchema = z.enum(['Apple', 'Adobe', 'Microsoft', 'Sun Microsystems', 'Silicon Graphics', 'Taligent'])
-    .describe('The platform on which the profile was created.');
-const WhitepointSchema = z.tuple([z.number(), z.number(), z.number()])
-    .describe('The white point of the profile.');
+import { dsbunnyRegistry } from '@dsbunny/zod-registry';
+const VersionSchema = z.enum(['2.0', '2.1', '2.4', '4.0', '4.2', '4.3', '4.4']).register(dsbunnyRegistry, {
+    id: 'VersionSchema',
+    description: 'The version of the ICC profile.',
+});
+const IntentSchema = z.enum(['Perceptual', 'Relative', 'Saturation', 'Absolute']).register(dsbunnyRegistry, {
+    id: 'IntentSchema',
+    description: 'The rendering intent of the profile.',
+});
+const DeviceClassSchema = z.enum(['Scanner', 'Monitor', 'Printer', 'Link', 'Abstract', 'Space', 'Named color']).register(dsbunnyRegistry, {
+    id: 'DeviceClassSchema',
+    description: 'The device class of the profile.',
+});
+const PlatformSchema = z.enum(['Apple', 'Adobe', 'Microsoft', 'Sun Microsystems', 'Silicon Graphics', 'Taligent']).register(dsbunnyRegistry, {
+    id: 'PlatformSchema',
+    description: 'The platform on which the profile was created.',
+});
+const WhitepointSchema = z.tuple([z.number(), z.number(), z.number()]).register(dsbunnyRegistry, {
+    id: 'WhitepointSchema',
+    description: 'The white point of the profile.',
+});
 export const IccProfileSchema = z.object({
     version: VersionSchema,
     intent: IntentSchema,
@@ -37,6 +48,8 @@ export const IccProfileSchema = z.object({
     viewingConditionsDescription: z.string().optional()
         .describe('A description of the viewing conditions.'),
     whitepoint: WhitepointSchema.optional(),
-})
-    .describe('Metadata from the ICC standard.');
+}).register(dsbunnyRegistry, {
+    id: 'IccProfileSchema',
+    description: 'Metadata from the ICC standard.',
+});
 //# sourceMappingURL=icc-profile.schema.js.map

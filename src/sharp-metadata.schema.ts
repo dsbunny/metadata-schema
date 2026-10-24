@@ -2,6 +2,7 @@
 // Derived from Sharp.Metadata in sharp.d.ts.
 
 import * as z from "zod";
+import { dsbunnyRegistry } from '@dsbunny/zod-registry';
 
 export const FormatEnumSchema = z.enum([
 	'avif',
@@ -25,8 +26,10 @@ export const FormatEnumSchema = z.enum([
 	'tif',
 	'v',
 	'webp',
-])
-	.describe('Name of decoder used to decompress image data e.g. jpeg, png, webp, gif, svg.');
+]).register(dsbunnyRegistry, {
+	id: 'FormatEnumSchema',
+	description: 'Name of decoder used to decompress image data e.g. jpeg, png, webp, gif, svg.',
+});
 export type FormatEnum = z.infer<typeof FormatEnumSchema>;
 
 export const ColourspaceEnumSchema = z.enum([
@@ -35,18 +38,25 @@ export const ColourspaceEnumSchema = z.enum([
 	'bw',
 	'cmyk',
 	'srgb',
-])
-	.describe('Name of colour space interpretation.');
+]).register(dsbunnyRegistry, {
+	id: 'ColourspaceEnumSchema',
+	description: 'Name of colour space interpretation.',
+});
 export type ColourspaceEnum = z.infer<typeof ColourspaceEnumSchema>;
 
 // 3 for sRGB, 4 for CMYK.
-export const ChannelsSchema = z.number().min(3).max(4)
-	.describe('Number of bands e.g. 3 for sRGB, 4 for CMYK.');
+export const ChannelsSchema = z.number().min(3).max(4).register(dsbunnyRegistry, {
+	id: 'ChannelsSchema',
+	description: 'Number of bands e.g. 3 for sRGB, 4 for CMYK.',
+});
 export type Channels = z.infer<typeof ChannelsSchema>;
 
 export const LevelMetadataSchema = z.object({
 	width: z.number(),
 	height: z.number(),
+}).register(dsbunnyRegistry, {
+	id: 'LevelMetadataSchema',
+	description: 'Metadata for a single level in a multi-level image.',
 });
 export type LevelMetadata = z.infer<typeof LevelMetadataSchema>;
 
@@ -106,6 +116,8 @@ export const SharpMetadataSchema = z.object({
 		.describe('The unit of resolution (density).'),
 	formatMagick: z.string().optional()
 		.describe('String containing format for images loaded via *magick.'),
-})
-	.describe('Metadata from the sharp image processing library.');
+}).register(dsbunnyRegistry, {
+	id: 'SharpMetadataSchema',
+	description: 'Metadata from the sharp image processing library.',
+});
 export type SharpMetadata = z.infer<typeof SharpMetadataSchema>;

@@ -1,6 +1,7 @@
 // vim: tabstop=8 softtabstop=0 noexpandtab shiftwidth=8 nosmarttab
 // Derived from fluent-ffmpeg/ffprobe.js.
 import * as z from "zod";
+import { dsbunnyRegistry } from '@dsbunny/zod-registry';
 export const FfprobeStreamDispositionSchema = z.object({
     default: z.number().optional()
         .describe('Whether the stream is the default.'),
@@ -26,8 +27,10 @@ export const FfprobeStreamDispositionSchema = z.object({
         .describe('Whether the stream is an attached picture.'),
     timed_thumbnails: z.number().optional()
         .describe('Whether the stream is timed thumbnails.'),
-})
-    .describe('Disposition of the stream.');
+}).register(dsbunnyRegistry, {
+    id: 'FfprobeStreamDispositionSchema',
+    description: 'Disposition of the stream.',
+});
 export const FfprobeStreamSchema = z.object({
     index: z.number()
         .describe('The index of the stream.'),
@@ -121,8 +124,10 @@ export const FfprobeStreamSchema = z.object({
         .describe('The disposition of the stream.'),
     rotation: z.union([z.string(), z.number()]).optional()
         .describe('The rotation of the video stream.'),
-})
-    .describe('Stream metadata from the ffprobe tool.');
+}).register(dsbunnyRegistry, {
+    id: 'FfprobeStreamSchema',
+    description: 'Stream metadata from the ffprobe tool.',
+});
 export const FfprobeFormatSchema = z.object({
     filename: z.string().optional()
         .describe('The filename of the file.'),
@@ -146,13 +151,17 @@ export const FfprobeFormatSchema = z.object({
         .describe('The probe score of the file.'),
     tags: z.record(z.string(), z.union([z.string(), z.number()])).optional()
         .describe('The tags of the file.'),
-})
-    .describe('Format metadata from the ffprobe tool.');
+}).register(dsbunnyRegistry, {
+    id: 'FfprobeFormatSchema',
+    description: 'Format metadata from the ffprobe tool.',
+});
 export const FfprobeDataSchema = z.object({
     streams: z.array(FfprobeStreamSchema)
         .describe('The streams of the file.'),
     format: FfprobeFormatSchema,
     //chapters: z.array(z.unknown()),
-})
-    .describe('Metadata from the ffprobe tool.');
+}).register(dsbunnyRegistry, {
+    id: 'FfprobeDataSchema',
+    description: 'Metadata from the ffprobe tool.',
+});
 //# sourceMappingURL=ffprobe-data.schema.js.map

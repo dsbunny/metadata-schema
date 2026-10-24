@@ -1,36 +1,47 @@
 // vim: tabstop=8 softtabstop=0 noexpandtab shiftwidth=8 nosmarttab
 // Internal performance timings
 import * as z from "zod";
+import { dsbunnyRegistry } from '@dsbunny/zod-registry';
 // #region Base
 export const FileTimingsSchema = z.object({
     file_http_duration: z.number()
         .describe('Time taken to download the file from the HTTP server.'),
     file_ck_duration: z.number()
         .describe('Time taken to calculate the checksum of the file.'),
-})
-    .describe('Performance timings for the file.');
+}).register(dsbunnyRegistry, {
+    id: 'FileTimingsSchema',
+    description: 'Performance timings for the file.',
+});
 export const ImageTimingsSchema = FileTimingsSchema.extend({
     image_sharp_duration: z.number()
         .describe('Time taken to probe the image using sharp.'),
     image_ffprobe_duration: z.number()
         .describe('Time taken to probe the image using ffprobe.'),
-})
-    .describe('Performance timings for the image.');
+}).register(dsbunnyRegistry, {
+    id: 'ImageTimingsSchema',
+    description: 'Performance timings for the image.',
+});
 export const TextureTimingsSchema = FileTimingsSchema.extend({
     texture_ktxinfo_duration: z.number()
         .describe('Time taken to probe the KTX texture information.'),
-})
-    .describe('Performance timings for the texture.');
+}).register(dsbunnyRegistry, {
+    id: 'TextureTimingsSchema',
+    description: 'Performance timings for the texture.',
+});
 export const VideoTimingsSchema = FileTimingsSchema.extend({
     video_ffprobe_duration: z.number()
         .describe('Time taken to probe the image using ffprobe.'),
-})
-    .describe('Performance timings for the image.');
+}).register(dsbunnyRegistry, {
+    id: 'VideoTimingsSchema',
+    description: 'Performance timings for the image.',
+});
 export const MetadataTimingsSchema = z.object({
     metadata_http_duration: z.number()
         .describe('Time taken to upload the metadata to the HTTP server.'),
-})
-    .describe('Performance timings for the metadata.');
+}).register(dsbunnyRegistry, {
+    id: 'MetadataTimingsSchema',
+    description: 'Performance timings for the metadata.',
+});
 // #endregion
 // #region Preview
 export const PosterTimingsSchema = z.object({
@@ -46,8 +57,10 @@ export const PosterTimingsSchema = z.object({
         .describe('Time taken to calculate the checksum of the poster.'),
     poster_http_duration: z.number()
         .describe('Time taken to upload the poster to the HTTP server.'),
-})
-    .describe('Performance timings for the poster.');
+}).register(dsbunnyRegistry, {
+    id: 'PosterTimingsSchema',
+    description: 'Performance timings for the poster.',
+});
 export const AnimatedPosterTimingsSchema = z.object({
     animated_poster_ffmpeg_duration: z.number()
         .describe('Time taken to generate the animated poster using ffmpeg.'),
@@ -55,8 +68,10 @@ export const AnimatedPosterTimingsSchema = z.object({
         .describe('Time taken to calculate the checksum of the animated poster.'),
     animated_poster_http_duration: z.number()
         .describe('Time taken to upload the animated poster to the HTTP server.'),
-})
-    .describe('Performance timings for the animated poster.');
+}).register(dsbunnyRegistry, {
+    id: 'AnimatedPosterTimingsSchema',
+    description: 'Performance timings for the animated poster.',
+});
 export const PosterSeriesTimingsSchema = z.object({
     poster_series_ffmpeg_duration: z.number()
         .describe('Time taken to generate the poster series using ffmpeg.'),
@@ -68,15 +83,19 @@ export const PosterSeriesTimingsSchema = z.object({
         .describe('Time taken to calculate the checksum of the poster series.'),
     poster_series_http_duration: z.number()
         .describe('Time taken to upload the poster series to the HTTP server.'),
-})
-    .describe('Performance timings for the poster series.');
+}).register(dsbunnyRegistry, {
+    id: 'PosterSeriesTimingsSchema',
+    description: 'Performance timings for the poster series.',
+});
 export const TileSeriesImageTimingsSchema = z.object({
     tile_series_ck_duration: z.number()
         .describe('Time taken to calculate the checksum of the tile series.'),
     tile_series_http_duration: z.number()
         .describe('Time taken to upload the tile series to the HTTP server.'),
-})
-    .describe('Performance timings for the tile series.');
+}).register(dsbunnyRegistry, {
+    id: 'TileSeriesImageTimingsSchema',
+    description: 'Performance timings for the tile series.',
+});
 export const TileSeriesTimingsSchema = z.object({
     tile_series_ffprobe_duration: z.number()
         .describe('Time taken to probe the video using ffprobe.'),
@@ -86,8 +105,10 @@ export const TileSeriesTimingsSchema = z.object({
         .describe('Time taken to convert the tile series using avifenc.'),
     tile_series_sharp_duration: z.number().optional()
         .describe('Time taken to convert the tile series using sharp.'),
-})
-    .describe('Performance timings for the tile series set.');
+}).register(dsbunnyRegistry, {
+    id: 'TileSeriesTimingsSchema',
+    description: 'Performance timings for the tile series set.',
+});
 export const PrevueTimingsSchema = z.object({
     prevue_ffmpeg_duration: z.number()
         .describe('Time taken to generate the prevue using ffmpeg.'),
@@ -95,7 +116,9 @@ export const PrevueTimingsSchema = z.object({
         .describe('Time taken to calculate the checksum of the prevue.'),
     prevue_http_duration: z.number()
         .describe('Time taken to upload the prevue to the HTTP server.'),
-})
-    .describe('Performance timings for the prevue video.');
+}).register(dsbunnyRegistry, {
+    id: 'PrevueTimingsSchema',
+    description: 'Performance timings for the prevue video.',
+});
 // #endregion
 //# sourceMappingURL=timings.schema.js.map

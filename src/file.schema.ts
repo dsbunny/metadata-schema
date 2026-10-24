@@ -2,7 +2,8 @@
 // File metadata
 
 import * as z from "zod";
-import { S3URISchema } from "./uri.schema.js";
+import { dsbunnyRegistry } from '@dsbunny/zod-registry';
+import { S3URISchema } from "@dsbunny/net-schema";
 
 export const FileStatAndChecksumsSchema = z.object({
 	s3_filename: z.string().min(1).max(255) // Matching Google Drive.
@@ -25,6 +26,8 @@ export const FileStatAndChecksumsSchema = z.object({
 		.describe('The ETag of the file in S3.'),
 	s3_parts: z.array(z.number().min(20).max(5497558138880)).min(1).max(10000)
 		.describe('The size of each part of the file in S3.'),
-})
-	.describe('The file metadata.');
+}).register(dsbunnyRegistry, {
+	id: 'FileStatAndChecksumsSchema',
+	description: 'The file metadata.',
+});
 export type FileStatAndChecksums = z.infer<typeof FileStatAndChecksumsSchema>;

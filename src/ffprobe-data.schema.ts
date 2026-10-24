@@ -2,6 +2,7 @@
 // Derived from fluent-ffmpeg/ffprobe.js.
 
 import * as z from "zod";
+import { dsbunnyRegistry } from '@dsbunny/zod-registry';
 
 export const FfprobeStreamDispositionSchema = z.object({
 	default: z.number().optional()
@@ -28,8 +29,10 @@ export const FfprobeStreamDispositionSchema = z.object({
 		.describe('Whether the stream is an attached picture.'),
 	timed_thumbnails: z.number().optional()
 		.describe('Whether the stream is timed thumbnails.'),
-})
-	.describe('Disposition of the stream.');
+}).register(dsbunnyRegistry, {
+	id: 'FfprobeStreamDispositionSchema',
+	description: 'Disposition of the stream.',
+});
 export type FfprobeStreamDisposition = z.infer<typeof FfprobeStreamDispositionSchema>;
 
 export const FfprobeStreamSchema = z.object({
@@ -125,8 +128,10 @@ export const FfprobeStreamSchema = z.object({
 		.describe('The disposition of the stream.'),
 	rotation: z.union([z.string(), z.number()]).optional()
 		.describe('The rotation of the video stream.'),
-})
-	.describe('Stream metadata from the ffprobe tool.');
+}).register(dsbunnyRegistry, {
+	id: 'FfprobeStreamSchema',
+	description: 'Stream metadata from the ffprobe tool.',
+});
 export type FfprobeStream = z.infer<typeof FfprobeStreamSchema>;
 
 export const FfprobeFormatSchema = z.object({
@@ -152,8 +157,10 @@ export const FfprobeFormatSchema = z.object({
 		.describe('The probe score of the file.'),
 	tags: z.record(z.string(), z.union([z.string(), z.number()])).optional()
 		.describe('The tags of the file.'),
-})
-	.describe('Format metadata from the ffprobe tool.');
+}).register(dsbunnyRegistry, {
+	id: 'FfprobeFormatSchema',
+	description: 'Format metadata from the ffprobe tool.',
+});
 export type FfprobeFormat = z.infer<typeof FfprobeFormatSchema>;
 
 export const FfprobeDataSchema = z.object({
@@ -161,6 +168,8 @@ export const FfprobeDataSchema = z.object({
 		.describe('The streams of the file.'),
 	format: FfprobeFormatSchema,
 	//chapters: z.array(z.unknown()),
-})
-	.describe('Metadata from the ffprobe tool.');
+}).register(dsbunnyRegistry, {
+	id: 'FfprobeDataSchema',
+	description: 'Metadata from the ffprobe tool.',
+});
 export type FfprobeData = z.infer<typeof FfprobeDataSchema>;

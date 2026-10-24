@@ -1,6 +1,7 @@
 // vim: tabstop=8 softtabstop=0 noexpandtab shiftwidth=8 nosmarttab
 // Derived from iptc-reader/index.js.
 import * as z from "zod";
+import { dsbunnyRegistry } from '@dsbunny/zod-registry';
 export const IptcProfileSchema = z.object({
     title: z.string().optional()
         .describe('Title of the image'),
@@ -24,6 +25,8 @@ export const IptcProfileSchema = z.object({
         .describe('Copyright of the image'),
     category: z.string().optional()
         .describe('Category of the image'),
-})
-    .describe('Metadata from the IPTC standard.');
+}).register(dsbunnyRegistry, {
+    id: 'IptcProfileSchema',
+    description: 'Metadata from the IPTC standard.',
+});
 //# sourceMappingURL=iptc-profile.schema.js.map

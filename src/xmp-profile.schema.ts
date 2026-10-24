@@ -2,6 +2,7 @@
 // Derived from xmp-reader/index.js.
 
 import * as z from "zod";
+import { dsbunnyRegistry } from '@dsbunny/zod-registry';
 
 export const XmpProfileSchema = z.object({
 	keywords: z.array(z.string()).optional()
@@ -20,6 +21,8 @@ export const XmpProfileSchema = z.object({
 		.describe('The attribution of the image.'),
 	terms: z.string().optional()
 		.describe('The terms of the image.'),
-})
-	.describe('Metadata from the XMP standard.');
+}).register(dsbunnyRegistry, {
+	id: 'XmpProfileSchema',
+	description: 'Metadata from the XMP standard.',
+});
 export type XmpProfile = z.infer<typeof XmpProfileSchema>;

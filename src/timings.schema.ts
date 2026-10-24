@@ -2,6 +2,7 @@
 // Internal performance timings
 
 import * as z from "zod";
+import { dsbunnyRegistry } from '@dsbunny/zod-registry';
 
 // #region Base
 export const FileTimingsSchema = z.object({
@@ -9,8 +10,10 @@ export const FileTimingsSchema = z.object({
 		.describe('Time taken to download the file from the HTTP server.'),
 	file_ck_duration: z.number()
 		.describe('Time taken to calculate the checksum of the file.'),
-})
-	.describe('Performance timings for the file.');
+}).register(dsbunnyRegistry, {
+	id: 'FileTimingsSchema',
+	description: 'Performance timings for the file.',
+});
 export type FileTimings = z.infer<typeof FileTimingsSchema>;
 
 export const ImageTimingsSchema = FileTimingsSchema.extend({
@@ -18,29 +21,37 @@ export const ImageTimingsSchema = FileTimingsSchema.extend({
 		.describe('Time taken to probe the image using sharp.'),
 	image_ffprobe_duration: z.number()
 		.describe('Time taken to probe the image using ffprobe.'),
-})
-	.describe('Performance timings for the image.');
+}).register(dsbunnyRegistry, {
+	id: 'ImageTimingsSchema',
+	description: 'Performance timings for the image.',
+});
 export type ImageTimings = z.infer<typeof ImageTimingsSchema>;
 
 export const TextureTimingsSchema = FileTimingsSchema.extend({
 	texture_ktxinfo_duration: z.number()
 		.describe('Time taken to probe the KTX texture information.'),
-})
-	.describe('Performance timings for the texture.');
+}).register(dsbunnyRegistry, {
+	id: 'TextureTimingsSchema',
+	description: 'Performance timings for the texture.',
+});
 export type TextureTimings = z.infer<typeof TextureTimingsSchema>;
 
 export const VideoTimingsSchema = FileTimingsSchema.extend({
 	video_ffprobe_duration: z.number()
 		.describe('Time taken to probe the image using ffprobe.'),
-})
-	.describe('Performance timings for the image.');
+}).register(dsbunnyRegistry, {
+	id: 'VideoTimingsSchema',
+	description: 'Performance timings for the image.',
+});
 export type VideoTimings = z.infer<typeof VideoTimingsSchema>;
 
 export const MetadataTimingsSchema = z.object({
 	metadata_http_duration: z.number()
 		.describe('Time taken to upload the metadata to the HTTP server.'),
-})
-	.describe('Performance timings for the metadata.');
+}).register(dsbunnyRegistry, {
+	id: 'MetadataTimingsSchema',
+	description: 'Performance timings for the metadata.',
+});
 export type MetadataTimings = z.infer<typeof MetadataTimingsSchema>;
 // #endregion
 
@@ -58,8 +69,10 @@ export const PosterTimingsSchema = z.object({
 		.describe('Time taken to calculate the checksum of the poster.'),
 	poster_http_duration: z.number()
 		.describe('Time taken to upload the poster to the HTTP server.'),
-})
-	.describe('Performance timings for the poster.');
+}).register(dsbunnyRegistry, {
+	id: 'PosterTimingsSchema',
+	description: 'Performance timings for the poster.',
+});
 export type PosterTimings = z.infer<typeof PosterTimingsSchema>;
 
 export const AnimatedPosterTimingsSchema = z.object({
@@ -69,8 +82,10 @@ export const AnimatedPosterTimingsSchema = z.object({
 		.describe('Time taken to calculate the checksum of the animated poster.'),
 	animated_poster_http_duration: z.number()
 		.describe('Time taken to upload the animated poster to the HTTP server.'),
-})
-	.describe('Performance timings for the animated poster.');
+}).register(dsbunnyRegistry, {
+	id: 'AnimatedPosterTimingsSchema',
+	description: 'Performance timings for the animated poster.',
+});
 export type AnimatedPosterTimings = z.infer<typeof AnimatedPosterTimingsSchema>;
 
 export const PosterSeriesTimingsSchema = z.object({
@@ -84,8 +99,10 @@ export const PosterSeriesTimingsSchema = z.object({
 		.describe('Time taken to calculate the checksum of the poster series.'),
 	poster_series_http_duration: z.number()
 		.describe('Time taken to upload the poster series to the HTTP server.'),
-})
-	.describe('Performance timings for the poster series.');
+}).register(dsbunnyRegistry, {
+	id: 'PosterSeriesTimingsSchema',
+	description: 'Performance timings for the poster series.',
+});
 export type PosterSeriesTimings = z.infer<typeof PosterSeriesTimingsSchema>;
 
 export const TileSeriesImageTimingsSchema = z.object({
@@ -93,8 +110,10 @@ export const TileSeriesImageTimingsSchema = z.object({
 		.describe('Time taken to calculate the checksum of the tile series.'),
 	tile_series_http_duration: z.number()
 		.describe('Time taken to upload the tile series to the HTTP server.'),
-})
-	.describe('Performance timings for the tile series.');
+}).register(dsbunnyRegistry, {
+	id: 'TileSeriesImageTimingsSchema',
+	description: 'Performance timings for the tile series.',
+});
 export type TileSeriesImageTimings = z.infer<typeof TileSeriesImageTimingsSchema>;
 
 export const TileSeriesTimingsSchema = z.object({
@@ -106,8 +125,10 @@ export const TileSeriesTimingsSchema = z.object({
 		.describe('Time taken to convert the tile series using avifenc.'),
 	tile_series_sharp_duration: z.number().optional()
 		.describe('Time taken to convert the tile series using sharp.'),
-})
-	.describe('Performance timings for the tile series set.');
+}).register(dsbunnyRegistry, {
+	id: 'TileSeriesTimingsSchema',
+	description: 'Performance timings for the tile series set.',
+});
 export type TileSeriesTimings = z.infer<typeof TileSeriesTimingsSchema>;
 
 export const PrevueTimingsSchema = z.object({
@@ -117,7 +138,9 @@ export const PrevueTimingsSchema = z.object({
 		.describe('Time taken to calculate the checksum of the prevue.'),
 	prevue_http_duration: z.number()
 		.describe('Time taken to upload the prevue to the HTTP server.'),
-})
-	.describe('Performance timings for the prevue video.');
+}).register(dsbunnyRegistry, {
+	id: 'PrevueTimingsSchema',
+	description: 'Performance timings for the prevue video.',
+});
 export type PrevueTimings = z.infer<typeof PrevueTimingsSchema>;
 // #endregion

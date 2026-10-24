@@ -1,6 +1,7 @@
 // vim: tabstop=8 softtabstop=0 noexpandtab shiftwidth=8 nosmarttab
 // Derived from xmp-reader/index.js.
 import * as z from "zod";
+import { dsbunnyRegistry } from '@dsbunny/zod-registry';
 export const XmpProfileSchema = z.object({
     keywords: z.array(z.string()).optional()
         .describe('Keywords associated with the image.'),
@@ -18,6 +19,8 @@ export const XmpProfileSchema = z.object({
         .describe('The attribution of the image.'),
     terms: z.string().optional()
         .describe('The terms of the image.'),
-})
-    .describe('Metadata from the XMP standard.');
+}).register(dsbunnyRegistry, {
+    id: 'XmpProfileSchema',
+    description: 'Metadata from the XMP standard.',
+});
 //# sourceMappingURL=xmp-profile.schema.js.map
