@@ -52,6 +52,8 @@ export const ChannelsSchema = z.number().min(3).max(4).register(dsbunnyRegistry,
 export type Channels = z.infer<typeof ChannelsSchema>;
 
 export const LevelMetadataSchema = z.object({
+	'@type': z.literal('LevelMetadata')
+		.describe('Type of the level metadata object.'),
 	width: z.number(),
 	height: z.number(),
 }).register(dsbunnyRegistry, {
@@ -61,6 +63,8 @@ export const LevelMetadataSchema = z.object({
 export type LevelMetadata = z.infer<typeof LevelMetadataSchema>;
 
 export const SharpMetadataSchema = z.object({
+	'@type': z.literal('SharpMetadata')
+		.describe('Type of the sharp metadata object.'),
 	orientation: z.number().optional()
 		.describe('Number value of the EXIF Orientation header, if present.'),
 	format: FormatEnumSchema.optional(),

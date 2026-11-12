@@ -5,6 +5,8 @@ import * as z from "zod";
 import { dsbunnyRegistry } from '@dsbunny/zod-registry';
 
 export const XmpProfileSchema = z.object({
+	'@type': z.literal('XmpProfile')
+		.describe('Type of the XMP profile object.'),
 	keywords: z.array(z.string()).optional()
 		.describe('Keywords associated with the image.'),
 	title: z.string().optional()

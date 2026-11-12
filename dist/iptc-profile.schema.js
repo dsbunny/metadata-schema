@@ -3,6 +3,8 @@
 import * as z from "zod";
 import { dsbunnyRegistry } from '@dsbunny/zod-registry';
 export const IptcProfileSchema = z.object({
+    '@type': z.literal('IptcProfile')
+        .describe('Type of the IPTC profile metadata object.'),
     title: z.string().optional()
         .describe('Title of the image'),
     caption: z.string().optional()

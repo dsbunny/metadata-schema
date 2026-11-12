@@ -1,5 +1,6 @@
 import * as z from "zod";
 export declare const IptcProfileSchema: z.ZodObject<{
+    '@type': z.ZodLiteral<"IptcProfile">;
     title: z.ZodOptional<z.ZodString>;
     caption: z.ZodOptional<z.ZodString>;
     credit: z.ZodOptional<z.ZodString>;

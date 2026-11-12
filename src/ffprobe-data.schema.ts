@@ -5,6 +5,8 @@ import * as z from "zod";
 import { dsbunnyRegistry } from '@dsbunny/zod-registry';
 
 export const FfprobeStreamDispositionSchema = z.object({
+	'@type': z.literal('FfprobeStreamDisposition')
+		.describe('Type of the FFprobe stream disposition metadata object.'),
 	default: z.number().optional()
 		.describe('Whether the stream is the default.'),
 	dub: z.number().optional()
@@ -36,6 +38,8 @@ export const FfprobeStreamDispositionSchema = z.object({
 export type FfprobeStreamDisposition = z.infer<typeof FfprobeStreamDispositionSchema>;
 
 export const FfprobeStreamSchema = z.object({
+	'@type': z.literal('FfprobeStream')
+		.describe('Type of the FFprobe stream metadata object.'),
 	index: z.number()
 		.describe('The index of the stream.'),
 	codec_name: z.string().optional()
@@ -135,6 +139,8 @@ export const FfprobeStreamSchema = z.object({
 export type FfprobeStream = z.infer<typeof FfprobeStreamSchema>;
 
 export const FfprobeFormatSchema = z.object({
+	'@type': z.literal('FfprobeFormat')
+		.describe('Type of the FFprobe format metadata object.'),
 	filename: z.string().optional()
 		.describe('The filename of the file.'),
 	nb_streams: z.number().optional()
@@ -164,6 +170,8 @@ export const FfprobeFormatSchema = z.object({
 export type FfprobeFormat = z.infer<typeof FfprobeFormatSchema>;
 
 export const FfprobeDataSchema = z.object({
+	'@type': z.literal('FfprobeData')
+		.describe('Type of the FFprobe data metadata object.'),
 	streams: z.array(FfprobeStreamSchema)
 		.describe('The streams of the file.'),
 	format: FfprobeFormatSchema,

@@ -1,5 +1,6 @@
 import * as z from "zod";
 export declare const IccProfileSchema: z.ZodObject<{
+    '@type': z.ZodLiteral<"IccProfile">;
     version: z.ZodEnum<{
         "2.0": "2.0";
         2.1: "2.1";

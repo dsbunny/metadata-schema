@@ -12,13 +12,16 @@ import { AnimatedPosterTimingsSchema, FileTimingsSchema, ImageTimingsSchema, Met
 import { XmpProfileSchema } from './xmp-profile.schema.js';
 // #region Metadata
 // Base metadata for all files.
-const BaseMetadata = {
-    type: z.literal('base'),
+const BaseMetadataSchema = z.object({
+    '@type': z.literal('BaseMetadata')
+        .describe('Type of the base metadata object.'),
     file: FileStatAndChecksumsSchema,
     timings: FileTimingsSchema,
     tags: z.array(z.string().max(64)).max(100).optional(),
-};
+});
 export const HintDataPosterEntrySchema = z.object({
+    '@type': z.literal('HintDataPosterEntry')
+        .describe('Type of the hint data poster entry object.'),
     quality: z.enum(['medium', 'high', 'sample']),
     width: z.number().int().positive(),
     height: z.number().int().positive(),
@@ -27,23 +30,24 @@ export const HintDataPosterEntrySchema = z.object({
     description: 'A single entry in the hint poster array.',
 });
 export const HintDataSchema = z.object({
-    type: z.literal('hint'),
+    '@type': z.literal('HintData')
+        .describe('Type of the hint data object.'),
     poster: z.array(HintDataPosterEntrySchema),
 }).register(dsbunnyRegistry, {
     id: 'HintDataSchema',
     description: 'Hint data for assets.',
 });
-export const FileMetadataSchema = z.object({
-    ...BaseMetadata,
-    type: z.literal('file'),
+export const FileMetadataSchema = BaseMetadataSchema.extend({
+    '@type': z.literal('FileMetadata')
+        .describe('Type of the file metadata object.'),
     hint: HintDataSchema.optional(),
 }).register(dsbunnyRegistry, {
     id: 'FileMetadataSchema',
     description: 'Metadata for a file.',
 });
-export const ImageMetadataSchema = z.object({
-    ...BaseMetadata,
-    type: z.literal('image'),
+export const ImageMetadataSchema = BaseMetadataSchema.extend({
+    '@type': z.literal('ImageMetadata')
+        .describe('Type of the image metadata object.'),
     sharp: SharpMetadataSchema,
     exif: ExifMetadataSchema.optional(),
     icc: IccProfileSchema.optional(),
@@ -56,9 +60,9 @@ export const ImageMetadataSchema = z.object({
     id: 'ImageMetadataSchema',
     description: 'Metadata for an image file.',
 });
-export const TextureMetadataSchema = z.object({
-    ...BaseMetadata,
-    type: z.literal('texture'),
+export const TextureMetadataSchema = BaseMetadataSchema.extend({
+    '@type': z.literal('TextureMetadata')
+        .describe('Type of the texture metadata object.'),
     ktx: KTXInfoSchema.optional(),
     hint: HintDataSchema.optional(),
     timings: TextureTimingsSchema,
@@ -66,9 +70,9 @@ export const TextureMetadataSchema = z.object({
     id: 'TextureMetadataSchema',
     description: 'Metadata for a texture file.',
 });
-export const VideoMetadataSchema = z.object({
-    ...BaseMetadata,
-    type: z.literal('video'),
+export const VideoMetadataSchema = BaseMetadataSchema.extend({
+    '@type': z.literal('VideoMetadata')
+        .describe('Type of the video metadata object.'),
     ffprobe: FfprobeDataSchema
         .describe('Metadata from the ffprobe tool.'),
     codecs: z.array(z.string().max(255)).optional()
@@ -81,16 +85,16 @@ export const VideoMetadataSchema = z.object({
 });
 // Media types that are not supported, primarily due to technical limitations.
 // Media can be rejected due to check rules.
-export const RejectedMetadataSchema = z.object({
-    ...BaseMetadata,
-    type: z.literal('rejected'),
+export const RejectedMetadataSchema = BaseMetadataSchema.extend({
+    '@type': z.literal('RejectedMetadata')
+        .describe('Type of the rejected metadata object.'),
     error_text: z.string(),
 }).register(dsbunnyRegistry, {
     id: 'RejectedMetadataSchema',
     description: 'Metadata for an rejected file.',
 });
 // Union of all metadata types.
-export const MetadataSchema = z.discriminatedUnion("type", [
+export const MetadataSchema = z.discriminatedUnion("@type", [
     FileMetadataSchema,
     ImageMetadataSchema,
     TextureMetadataSchema,
@@ -101,9 +105,9 @@ export const MetadataSchema = z.discriminatedUnion("type", [
     description: 'Union of all metadata types.',
 });
 // Encapsulation of metadata in a S3 object.
-export const MetadataMetadataSchema = z.object({
-    ...BaseMetadata,
-    type: z.literal('metadata'),
+export const MetadataMetadataSchema = BaseMetadataSchema.extend({
+    '@type': z.literal('MetadataMetadata')
+        .describe('Type of the metadata metadata object.'),
     timings: MetadataTimingsSchema,
 }).register(dsbunnyRegistry, {
     id: 'MetadataMetadataSchema',
@@ -111,9 +115,9 @@ export const MetadataMetadataSchema = z.object({
 });
 // #endregion
 // #region Preview
-export const PosterMetadataEntrySchema = z.object({
-    ...BaseMetadata,
-    type: z.literal('poster-image'),
+export const PosterMetadataEntrySchema = BaseMetadataSchema.extend({
+    '@type': z.literal('PosterMetadataEntry')
+        .describe('Type of the poster metadata entry object.'),
     quality: z.enum(['medium', 'high', 'sample']),
     width: z.number().int().positive(),
     height: z.number().int().positive(),
@@ -124,15 +128,16 @@ export const PosterMetadataEntrySchema = z.object({
     description: 'A single entry in the poster array.',
 });
 export const PosterMetadataSchema = z.object({
-    type: z.literal('poster'),
+    '@type': z.literal('PosterMetadata')
+        .describe('Type of the poster metadata object.'),
     poster: z.array(PosterMetadataEntrySchema),
 }).register(dsbunnyRegistry, {
     id: 'PosterMetadataSchema',
     description: 'Metadata for an image poster.',
 });
-export const AnimatedPosterMetadataEntrySchema = z.object({
-    ...BaseMetadata,
-    type: z.literal('animated-poster-image'),
+export const AnimatedPosterMetadataEntrySchema = BaseMetadataSchema.extend({
+    '@type': z.literal('AnimatedPosterMetadataEntry')
+        .describe('Type of the animated poster metadata entry object.'),
     width: z.number().int().positive(),
     height: z.number().int().positive(),
     timings: AnimatedPosterTimingsSchema,
@@ -141,15 +146,16 @@ export const AnimatedPosterMetadataEntrySchema = z.object({
     description: 'A single entry in the animated poster array.',
 });
 export const AnimatedPosterMetadataSchema = z.object({
-    type: z.literal('animated-poster'),
+    '@type': z.literal('AnimatedPosterMetadata')
+        .describe('Type of the animated poster metadata object.'),
     poster: AnimatedPosterMetadataEntrySchema,
 }).register(dsbunnyRegistry, {
     id: 'AnimatedPosterMetadataSchema',
     description: 'Metadata for an animated poster.',
 });
-export const PosterSeriesMetadataEntrySchema = z.object({
-    ...BaseMetadata,
-    type: z.literal('poster-series-image'),
+export const PosterSeriesMetadataEntrySchema = BaseMetadataSchema.extend({
+    '@type': z.literal('PosterSeriesMetadataEntry')
+        .describe('Type of the poster series metadata entry object.'),
     index: z.number().int().min(1).max(3),
     quality: z.enum(['medium', 'high', 'sample']),
     width: z.number().int().positive(),
@@ -161,15 +167,16 @@ export const PosterSeriesMetadataEntrySchema = z.object({
     description: 'A single entry in the poster series array.',
 });
 export const PosterSeriesMetadataSchema = z.object({
-    type: z.literal('poster-series'),
+    '@type': z.literal('PosterSeriesMetadata')
+        .describe('Type of the poster series metadata object.'),
     series: z.array(PosterSeriesMetadataEntrySchema),
 }).register(dsbunnyRegistry, {
     id: 'PosterSeriesMetadataSchema',
     description: 'Metadata for an image poster series.',
 });
-export const TileSeriesMetadataEntrySchema = z.object({
-    ...BaseMetadata,
-    type: z.literal('tile-series-image'),
+export const TileSeriesMetadataEntrySchema = BaseMetadataSchema.extend({
+    '@type': z.literal('TileSeriesMetadataEntry')
+        .describe('Type of the tile series metadata entry object.'),
     index: z.number().int().min(1).max(9999),
     count: z.number().int().min(1).max(9),
     quality: z.enum(['low']),
@@ -181,24 +188,25 @@ export const TileSeriesMetadataEntrySchema = z.object({
     description: 'A single entry in the tile series array.',
 });
 export const TileSeriesMetadataSchema = z.object({
-    type: z.literal('tile-series'),
+    '@type': z.literal('TileSeriesMetadata')
+        .describe('Type of the tile series metadata object.'),
     series: z.array(TileSeriesMetadataEntrySchema),
     timings: TileSeriesTimingsSchema,
 }).register(dsbunnyRegistry, {
     id: 'TileSeriesMetadataSchema',
     description: 'Metadata for an image tile series.',
 });
-export const TileSeriesMetadataMetadataSchema = z.object({
-    ...BaseMetadata,
-    type: z.literal('tile-series-metadata'),
+export const TileSeriesMetadataMetadataSchema = BaseMetadataSchema.extend({
+    '@type': z.literal('TileSeriesMetadataMetadata')
+        .describe('Type of the tile series metadata metadata object.'),
     timings: MetadataTimingsSchema,
 }).register(dsbunnyRegistry, {
     id: 'TileSeriesMetadataMetadataSchema',
     description: 'Metadata for an image tile series metadata.',
 });
-export const PrevueMetadataEntrySchema = z.object({
-    ...BaseMetadata,
-    type: z.literal('prevue-video'),
+export const PrevueMetadataEntrySchema = BaseMetadataSchema.extend({
+    '@type': z.literal('PrevueMetadataEntry')
+        .describe('Type of the prevue metadata entry object.'),
     width: z.number().int().positive(),
     height: z.number().int().positive(),
     timings: PrevueTimingsSchema,
@@ -207,14 +215,15 @@ export const PrevueMetadataEntrySchema = z.object({
     description: 'A single entry in the prevue array.',
 });
 export const PrevueMetadataSchema = z.object({
-    type: z.literal('prevue'),
+    '@type': z.literal('PrevueMetadata')
+        .describe('Type of the prevue metadata object.'),
     prevue: PrevueMetadataEntrySchema,
 }).register(dsbunnyRegistry, {
     id: 'PrevueMetadataSchema',
     description: 'Metadata for a video prevue.',
 });
 // Union of all preview metadata types.
-export const PreviewMetadataSchema = z.discriminatedUnion("type", [
+export const PreviewMetadataSchema = z.discriminatedUnion("@type", [
     PosterMetadataSchema,
     AnimatedPosterMetadataSchema,
     PosterSeriesMetadataSchema,

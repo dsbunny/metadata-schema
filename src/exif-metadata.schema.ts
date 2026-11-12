@@ -5,6 +5,8 @@ import * as z from "zod";
 import { dsbunnyRegistry } from '@dsbunny/zod-registry';
 
 const ImageTagsSchema = z.object({
+	'@type': z.literal('ImageTags')
+		.describe('Type of the image tags metadata object.'),
 	ProcessingSoftware: z.string()
 		.describe('The name and version of the software used to post-process the picture.'),
 	NewSubfileType: z.number()
@@ -471,6 +473,8 @@ const ImageTagsSchema = z.object({
 });
 
 const PhotoTagsSchema = z.object({
+	'@type': z.literal('PhotoTags')
+		.describe('Type of the photo tags metadata object.'),
 	ExposureTime: z.number()
 		.describe('Exposure time, given in seconds (sec).'),
 	FNumber: z.number()
@@ -628,6 +632,8 @@ const PhotoTagsSchema = z.object({
 });
 
 const IopTagsSchema = z.object({
+	'@type': z.literal('IopTags')
+		.describe('Type of the Iop tags metadata object.'),
 	InteroperabilityIndex: z.string()
 		.describe('ndicates the identification of the Interoperability rule. Use "R98" for stating ExifR98 Rules. Four bytes used including the termination code (NULL). see the separate volume of Recommended Exif Interoperability Rules (ExifR98) for other tags used for ExifR98.'),
 	//InteroperabilityVersion: z.buffer()  // Code String (CS)
@@ -644,6 +650,8 @@ const IopTagsSchema = z.object({
 });
 
 const GPSInfoTagsSchema = z.object({
+	'@type': z.literal('GPSInfoTags')
+		.describe('Type of the GPSInfo tags metadata object.'),
 	GPSVersionID: z.array(z.number())
 		.describe('Indicates the version of GPSInfoIFD. The version is given as 2.0.0.0. This tag is mandatory when GPSInfo tag is present. (Note: The GPSVersionID tag is given in bytes, unlike the ExifVersion tag. When the version is 2.0.0.0, the tag value is 02000000.H).'),
 	GPSLatitudeRef: z.string()
@@ -713,6 +721,8 @@ const GPSInfoTagsSchema = z.object({
 });
 
 export const ExifMetadataSchema = z.object({
+	'@type': z.literal('ExifMetadata')
+		.describe('Type of the EXIF metadata object.'),
 	Image: ImageTagsSchema.partial().optional(),
 	Photo: PhotoTagsSchema.partial().optional(),
 	Iop: IopTagsSchema.partial().optional(),

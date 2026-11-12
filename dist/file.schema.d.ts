@@ -1,5 +1,6 @@
 import * as z from "zod";
 export declare const FileStatAndChecksumsSchema: z.ZodObject<{
+    '@type': z.ZodLiteral<"FileStatAndChecksums">;
     s3_filename: z.ZodString;
     content_type: z.ZodString;
     size: z.ZodNumber;

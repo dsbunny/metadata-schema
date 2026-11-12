@@ -1,5 +1,6 @@
 import * as z from "zod";
 export declare const XmpProfileSchema: z.ZodObject<{
+    '@type': z.ZodLiteral<"XmpProfile">;
     keywords: z.ZodOptional<z.ZodArray<z.ZodString>>;
     title: z.ZodOptional<z.ZodString>;
     description: z.ZodOptional<z.ZodString>;

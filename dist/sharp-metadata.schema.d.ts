@@ -34,11 +34,13 @@ export type ColourspaceEnum = z.infer<typeof ColourspaceEnumSchema>;
 export declare const ChannelsSchema: z.ZodNumber;
 export type Channels = z.infer<typeof ChannelsSchema>;
 export declare const LevelMetadataSchema: z.ZodObject<{
+    '@type': z.ZodLiteral<"LevelMetadata">;
     width: z.ZodNumber;
     height: z.ZodNumber;
 }, z.core.$strip>;
 export type LevelMetadata = z.infer<typeof LevelMetadataSchema>;
 export declare const SharpMetadataSchema: z.ZodObject<{
+    '@type': z.ZodLiteral<"SharpMetadata">;
     orientation: z.ZodOptional<z.ZodNumber>;
     format: z.ZodOptional<z.ZodEnum<{
         input: "input";
@@ -95,6 +97,7 @@ export declare const SharpMetadataSchema: z.ZodObject<{
         b: z.ZodNumber;
     }, z.core.$strip>, z.ZodNumber]>>;
     levels: z.ZodOptional<z.ZodArray<z.ZodObject<{
+        '@type': z.ZodLiteral<"LevelMetadata">;
         width: z.ZodNumber;
         height: z.ZodNumber;
     }, z.core.$strip>>>;

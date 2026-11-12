@@ -44,6 +44,8 @@ export const ChannelsSchema = z.number().min(3).max(4).register(dsbunnyRegistry,
     description: 'Number of bands e.g. 3 for sRGB, 4 for CMYK.',
 });
 export const LevelMetadataSchema = z.object({
+    '@type': z.literal('LevelMetadata')
+        .describe('Type of the level metadata object.'),
     width: z.number(),
     height: z.number(),
 }).register(dsbunnyRegistry, {
@@ -51,6 +53,8 @@ export const LevelMetadataSchema = z.object({
     description: 'Metadata for a single level in a multi-level image.',
 });
 export const SharpMetadataSchema = z.object({
+    '@type': z.literal('SharpMetadata')
+        .describe('Type of the sharp metadata object.'),
     orientation: z.number().optional()
         .describe('Number value of the EXIF Orientation header, if present.'),
     format: FormatEnumSchema.optional(),

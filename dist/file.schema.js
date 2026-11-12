@@ -4,6 +4,8 @@ import * as z from "zod";
 import { dsbunnyRegistry } from '@dsbunny/zod-registry';
 import { S3URISchema } from "@dsbunny/net-schema";
 export const FileStatAndChecksumsSchema = z.object({
+    '@type': z.literal('FileStatAndChecksums')
+        .describe('Type of the file metadata object.'),
     s3_filename: z.string().min(1).max(255) // Matching Google Drive.
         .describe('The name of the file.'),
     content_type: z.string().min(5).max(255)

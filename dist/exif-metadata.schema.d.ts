@@ -1,6 +1,8 @@
 import * as z from "zod";
 export declare const ExifMetadataSchema: z.ZodObject<{
+    '@type': z.ZodLiteral<"ExifMetadata">;
     Image: z.ZodOptional<z.ZodObject<{
+        '@type': z.ZodOptional<z.ZodLiteral<"ImageTags">>;
         ProcessingSoftware: z.ZodOptional<z.ZodString>;
         NewSubfileType: z.ZodOptional<z.ZodNumber>;
         SubfileType: z.ZodOptional<z.ZodNumber>;
@@ -224,6 +226,7 @@ export declare const ExifMetadataSchema: z.ZodObject<{
         ReductionMatrix3: z.ZodOptional<z.ZodNumber>;
     }, z.core.$strip>>;
     Photo: z.ZodOptional<z.ZodObject<{
+        '@type': z.ZodOptional<z.ZodLiteral<"PhotoTags">>;
         ExposureTime: z.ZodOptional<z.ZodNumber>;
         FNumber: z.ZodOptional<z.ZodNumber>;
         ExposureProgram: z.ZodOptional<z.ZodNumber>;
@@ -296,12 +299,14 @@ export declare const ExifMetadataSchema: z.ZodObject<{
         Gamma: z.ZodOptional<z.ZodNumber>;
     }, z.core.$strip>>;
     Iop: z.ZodOptional<z.ZodObject<{
+        '@type': z.ZodOptional<z.ZodLiteral<"IopTags">>;
         InteroperabilityIndex: z.ZodOptional<z.ZodString>;
         RelatedImageFileFormat: z.ZodOptional<z.ZodString>;
         RelatedImageWidth: z.ZodOptional<z.ZodNumber>;
         RelatedImageLength: z.ZodOptional<z.ZodNumber>;
     }, z.core.$strip>>;
     GPSInfo: z.ZodOptional<z.ZodObject<{
+        '@type': z.ZodOptional<z.ZodLiteral<"GPSInfoTags">>;
         GPSVersionID: z.ZodOptional<z.ZodArray<z.ZodNumber>>;
         GPSLatitudeRef: z.ZodOptional<z.ZodString>;
         GPSLatitude: z.ZodOptional<z.ZodArray<z.ZodNumber>>;

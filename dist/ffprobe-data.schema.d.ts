@@ -1,5 +1,6 @@
 import * as z from "zod";
 export declare const FfprobeStreamDispositionSchema: z.ZodObject<{
+    '@type': z.ZodLiteral<"FfprobeStreamDisposition">;
     default: z.ZodOptional<z.ZodNumber>;
     dub: z.ZodOptional<z.ZodNumber>;
     original: z.ZodOptional<z.ZodNumber>;
@@ -15,6 +16,7 @@ export declare const FfprobeStreamDispositionSchema: z.ZodObject<{
 }, z.core.$strip>;
 export type FfprobeStreamDisposition = z.infer<typeof FfprobeStreamDispositionSchema>;
 export declare const FfprobeStreamSchema: z.ZodObject<{
+    '@type': z.ZodLiteral<"FfprobeStream">;
     index: z.ZodNumber;
     codec_name: z.ZodOptional<z.ZodString>;
     codec_long_name: z.ZodOptional<z.ZodString>;
@@ -60,6 +62,7 @@ export declare const FfprobeStreamSchema: z.ZodObject<{
     channel_layout: z.ZodOptional<z.ZodString>;
     bits_per_sample: z.ZodOptional<z.ZodNumber>;
     disposition: z.ZodOptional<z.ZodObject<{
+        '@type': z.ZodLiteral<"FfprobeStreamDisposition">;
         default: z.ZodOptional<z.ZodNumber>;
         dub: z.ZodOptional<z.ZodNumber>;
         original: z.ZodOptional<z.ZodNumber>;
@@ -77,6 +80,7 @@ export declare const FfprobeStreamSchema: z.ZodObject<{
 }, z.core.$strip>;
 export type FfprobeStream = z.infer<typeof FfprobeStreamSchema>;
 export declare const FfprobeFormatSchema: z.ZodObject<{
+    '@type': z.ZodLiteral<"FfprobeFormat">;
     filename: z.ZodOptional<z.ZodString>;
     nb_streams: z.ZodOptional<z.ZodNumber>;
     nb_programs: z.ZodOptional<z.ZodNumber>;
@@ -91,7 +95,9 @@ export declare const FfprobeFormatSchema: z.ZodObject<{
 }, z.core.$strip>;
 export type FfprobeFormat = z.infer<typeof FfprobeFormatSchema>;
 export declare const FfprobeDataSchema: z.ZodObject<{
+    '@type': z.ZodLiteral<"FfprobeData">;
     streams: z.ZodArray<z.ZodObject<{
+        '@type': z.ZodLiteral<"FfprobeStream">;
         index: z.ZodNumber;
         codec_name: z.ZodOptional<z.ZodString>;
         codec_long_name: z.ZodOptional<z.ZodString>;
@@ -137,6 +143,7 @@ export declare const FfprobeDataSchema: z.ZodObject<{
         channel_layout: z.ZodOptional<z.ZodString>;
         bits_per_sample: z.ZodOptional<z.ZodNumber>;
         disposition: z.ZodOptional<z.ZodObject<{
+            '@type': z.ZodLiteral<"FfprobeStreamDisposition">;
             default: z.ZodOptional<z.ZodNumber>;
             dub: z.ZodOptional<z.ZodNumber>;
             original: z.ZodOptional<z.ZodNumber>;
@@ -153,6 +160,7 @@ export declare const FfprobeDataSchema: z.ZodObject<{
         rotation: z.ZodOptional<z.ZodUnion<readonly [z.ZodString, z.ZodNumber]>>;
     }, z.core.$strip>>;
     format: z.ZodObject<{
+        '@type': z.ZodLiteral<"FfprobeFormat">;
         filename: z.ZodOptional<z.ZodString>;
         nb_streams: z.ZodOptional<z.ZodNumber>;
         nb_programs: z.ZodOptional<z.ZodNumber>;

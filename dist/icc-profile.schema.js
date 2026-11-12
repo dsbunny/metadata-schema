@@ -23,6 +23,8 @@ const WhitepointSchema = z.tuple([z.number(), z.number(), z.number()]).register(
     description: 'The white point of the profile.',
 });
 export const IccProfileSchema = z.object({
+    '@type': z.literal('IccProfile')
+        .describe('Type of the ICC profile metadata object.'),
     version: VersionSchema,
     intent: IntentSchema,
     cmm: z.string().optional()
